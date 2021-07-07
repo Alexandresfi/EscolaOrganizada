@@ -1,0 +1,24 @@
+body{
+  background-color: #2b2d42;
+  color: #edf2f4;
+}
+
+input{
+  outline: none;
+  margin-right: 5px;
+}
+
+table{
+  border: rgb(221, 9, 9) 4px solid;
+  border-radius: 5px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+td{
+  border: rgb(230, 11, 11) 3px solid;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+a{text-decoration: none; color:black}
