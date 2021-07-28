@@ -1,46 +1,47 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { AreaCadastro, AreaFrquencia, AreaNotas, AreaRelatorio,Secao} from "../links/styled";
+import { AreaCadastro, AreaFrquencia, AreaNotas, AreaRelatorio,Butao,Secao} from "../links/styled";
 import Ca from "../links/Ca";
 import Frequencia from "../links/Freq";
 import No from "../links/No";
 import Rela from "../links/Rela"
+import Header from "../Header/Header";
 
 
 function Menu (){
     return(
 
+        <>
+        <Header/>
         <Secao>
-
-            <AreaCadastro>
-                <Link to="cadastrar">
+            <Link to="cadastrar">
+                <AreaCadastro>
                     <Ca/>
-                </Link>
-            </AreaCadastro>
+                </AreaCadastro>
+            </Link>
             
-            <AreaFrquencia>
-                <Link to ="frequencia">
+            <Link to ="frequencia">
+                 <AreaFrquencia>
                     <Frequencia name="Cadastrar/Editar Conteúdo/Frequêcia"/>
-             </Link>
-            </AreaFrquencia>
+                </AreaFrquencia>
+            </Link>
             
-            <AreaNotas>
-                <Link to ="notas">
+            <Link to ="notas">
+                <AreaNotas>
                     <No name="Cadastrar/Editar Notas"/>
-                </Link>
-            </AreaNotas>
+                </AreaNotas>
+            </Link>
 
-            <AreaRelatorio>
-                <Link to="relatorio">
+            
+            <Link to="relatorio">
+                <AreaRelatorio>
                     <Rela/>
-                </Link>
-            </AreaRelatorio>
+                </AreaRelatorio>
+            </Link>
             
-            
-
-            <button><Link to="/"> Sair</Link></button>
         </Secao>
-
+        <Butao><Link to="/"> Sair</Link></Butao>
+        </>
     )
 }
 

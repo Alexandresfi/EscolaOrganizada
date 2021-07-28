@@ -1,22 +1,39 @@
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom";
 import {AreaCadastro} from "./styled"
+import Header from "../Header/Header"
 
-
+let Teste = [];
+let pos = 0;
 function Cadastrar(){
 
-	function alterando (event){
-		let t = event.target.value;
-		console.log(t)
+	const [nome,setNome] = useState("");
+	const [alunos,setAlunos] = useState([]);
+	function Alterando (event){
+		let n = event.target.value;
+		setNome(n);
+	}
+
+	function addAluno (event){
+		event.preventDefault()
+		if(nome) {
+			setAlunos([...alunos, nome]);
+			Teste=[...alunos, nome];
+			setNome("");
+		}
+		console.log(Teste);
+		console.log(alunos);
 	}
 
 	return(
+		<>
+		<Header/>
 		<AreaCadastro>
 		<h1>Cadastro dos estudantes</h1>
 		<label>
 			Dados do estudante:
 		</label> <br/>
-		<input onChange={alterando} type="text" name="nome de estudante" placeholder="Nome do estudante"/>
+		<input onChange={Alterando} type="text" name="nome de estudante" placeholder="Nome do estudante" value={nome} autoFocus></input>
 		<input type="text" name="turma" placeholder="Turma"/>
 		<input type="email" name="email" placeholder="E-mail do responsável"/> <br/>
 
@@ -38,10 +55,12 @@ function Cadastrar(){
 		<input type="text" name="Cidade" placeholder="Cidade"/>
 		<input type="text" name="Estado" placeholder="Estado"/>
 		<br/>
-		<input type="submit" value="cadastrar"/>
-		<button><Link to="/menu">voltar</Link></button>
+		<button onClick={addAluno} > cadastrar </button>
+		<button > <Link to="/menu">voltar</Link> </button>
+		
 		</AreaCadastro>
+		</>
 	)
 }
 
-export default Cadastrar;
+export {Cadastrar, Teste};

@@ -1,10 +1,14 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import Header from "../Header/Header"
+import { AreaDeTabelas } from "../Faltas/styled"
+import NotasAluno from "./NotasAluno"
 
 export default function Notas (){
     return(
-        <section>
-             <h1>Escola Organizada sistema de ensino </h1>
+        <>
+        <Header/>
+        <AreaDeTabelas>
             <p>Selecione o trimestre</p>
 
             <select name="trimestre">
@@ -14,9 +18,9 @@ export default function Notas (){
                 <option value="3°">3° trimestre</option>
             </select>
 
-            <div class="notas" id="notas1">
+            <div>
 
-                <table class="alunos" id="notasT">
+                <table>
                     <tr>
                         <td>Número</td>
                         <td>Estudantes</td>
@@ -25,11 +29,12 @@ export default function Notas (){
                         <td>Nota 3</td>
                         <td>Média</td>
                     </tr>
-
+                    <NotasAluno/>
                 </table>
                 <button>Salvar</button>
                 <button> <Link to="/menu"> Salvar e Voltar</Link></button>
             </div>
-        </section>
+        </AreaDeTabelas>
+        </>
     )
 }

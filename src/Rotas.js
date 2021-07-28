@@ -1,7 +1,7 @@
 import React from "react";
 import {Switch, Route} from "react-router-dom";
 import Login from './componentes/login/Login';
-import Cadastrar from './Cadastrar/Cadastrar';
+import { Cadastrar } from './Cadastrar/Cadastrar';
 import Fre from './Fre/Frquencia';
 import Faltas from "./Faltas/Faltas";
 import Notas from './Notas/Notas';
@@ -9,6 +9,7 @@ import Relatorio from './Relatório/Relatorio';
 import Menu from "./Menu/Menu";
 
 export default function Rotas (){
+    
     return(
         <Switch>
 
@@ -21,7 +22,7 @@ export default function Rotas (){
             </Route>
 
             <Route exact path="/cadastrar">
-                <Cadastrar nome="Cadastrar/Editar estudantes"/>
+                <Cadastrar  nome="Cadastrar/Editar estudantes"/>
             </Route>
 
             <Route exact path="/frequencia">
