@@ -11,7 +11,7 @@ function Login (prosp){
             <input type = "email" name="email" placeholder="E-mail"></input> <br/>
             <label>Senha:</label>
             <input type="password" name="senha" placeholder="Senha"></input>
-            <button type="submit">entrar</button>
+            <button to="/menu">entrar</button>
         </form>
         <h5>{prosp.SI}</h5>
         </AreaLogin>
