@@ -12,7 +12,7 @@ export default function Alunos(){
                 return(
                     <tr key={index}>
                     <td> {Teste.indexOf(aluno)+1} </td>
-                    <td>{aluno} <button>x</button></td>
+                    <td>{aluno}</td>
                     <td> <input type="checkbox"  name="faltas"/> </td>
                     </tr>
                 )
