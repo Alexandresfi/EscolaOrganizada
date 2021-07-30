@@ -11,10 +11,10 @@ export default function Header(){
                     </li>
 
                     <li> <a href="https://www.linkedin.com/in/alexandre-nascimento-66692920a/">
-                        <img src='/fundos/linkedin.png' /></a> </li>
+                        <img src='/fundos/linkedin.png'alt="linkedin"/></a> </li>
 
                     <li> <a href="https://github.com/Alexandresfi">
-                        <img src="/fundos/github.png"/> </a> </li>
+                        <img src="/fundos/github.png" alt="github"/> </a> </li>
                 </ul>
             </nav>
             <h2> Escola Organizada Sistema de Ensino</h2>
