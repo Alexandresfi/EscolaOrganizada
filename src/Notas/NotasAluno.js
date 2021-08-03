@@ -3,10 +3,9 @@ import { Teste } from "../Cadastrar/Cadastrar";
 
 
 export default function NotasAluno(props){
-
+    Teste.sort()
     return(
         <>
-                    
             {Teste.map(aluno=>{
                 return(
                     <tr>
