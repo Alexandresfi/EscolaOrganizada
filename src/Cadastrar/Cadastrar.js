@@ -64,7 +64,7 @@ function Cadastrar(){
 	if(Cep.toString().length !== 8){alert("CEP inválido, o CEP contém 8 digitos! Coloque apenas números, sem '-' por favor")}else{
 		const dados = await fetch(numero);
 		const endereco = await dados.json()
-		if(!endereco.cep){
+		if(!endereco.ok){
 			alert("CEP incorreto ou inválido, Verifique o número digitado e tente novamente.")
 			}else{
 				let informacao = {
