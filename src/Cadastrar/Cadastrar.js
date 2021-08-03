@@ -60,7 +60,7 @@ function Cadastrar(){
  }
 
  async function Completar(){
-	const numero = `http://viacep.com.br/ws/${Cep}/json`;
+	const numero = `https://ws.apicep.com/cep/${Cep}.json`;
 	if(Cep.toString().length !== 8){alert("CEP inválido, o CEP contém 8 digitos! Coloque apenas números, sem '-' por favor")}else{
 		const dados = await fetch(numero);
 		const endereco = await dados.json()
@@ -68,12 +68,12 @@ function Cadastrar(){
 			alert("CEP incorreto ou inválido, Verifique o número digitado e tente novamente.")
 			}else{
 				let informacao = {
-				cep: endereco.cep,
-				Endereco: endereco.logradouro,
+				cep: endereco.code,
+				Endereco: endereco.address,
 				NCasa: "",
 				Complemento:"",
-				Cidade: endereco.localidade,
-				Estado: endereco.uf
+				Cidade: endereco.city,
+				Estado: endereco.state
 				}
 			setDados([...Dados, informacao])
 			setContador(Contador+1);
