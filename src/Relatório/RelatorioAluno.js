@@ -4,9 +4,9 @@ import { Teste } from "../Cadastrar/Cadastrar";
 
 export default function RelatorioAluno(){
 
+       Teste.sort()
     return(
         <>
-                    
             {Teste.map(aluno=>{
                 return(
                     <tr>
