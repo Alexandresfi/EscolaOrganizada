@@ -21,15 +21,17 @@ export default function Notas (){
             <div>
 
                 <table>
-                    <tr>
-                        <td>Número</td>
-                        <td>Estudantes</td>
-                        <td>Nota 1</td>
-                        <td>Nota 2</td>
-                        <td>Nota 3</td>
-                        <td>Média</td>
-                    </tr>
-                    <NotasAluno/>
+                    <tbody>
+                        <tr>
+                            <td>Número</td>
+                            <td>Estudantes</td>
+                            <td>Nota 1</td>
+                            <td>Nota 2</td>
+                            <td>Nota 3</td>
+                            <td>Média</td>
+                        </tr>
+                        <NotasAluno/>
+                    </tbody>
                 </table>
                 <button>Salvar</button>
                 <button> <Link to="/menu"> Salvar e Voltar</Link></button>
