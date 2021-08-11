@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import {AreaCadastro} from "./styled";
 import Header from "../Header/Header";
+import { AlunoContext } from "../AlunoContext/alunoContext";
 
-let Teste = [];
 
 function Cadastrar(){
 
+	
+
 	const [nome,setNome] = useState("");
-	const [alunos,setAlunos] = useState([]);
+	const [alunos,setAlunos] = useContext(AlunoContext);
 	const [Contador, setContador] = useState(0);
-	const [Cep,setCep] = useState("")
+	const [Cep,setCep] = useState("");
 
 	const [Dados,setDados] = useState(
 		[
@@ -31,15 +33,11 @@ function Cadastrar(){
 	function addAluno (event){
 		event.preventDefault()
 		if(nome) {
-			setAlunos([...alunos, nome]);
-			Teste=[...alunos, nome].sort();
+			setAlunos([...alunos, nome].sort());
 			setNome("");
 			setCep("");
 			alert("Atenção! Para cadastrar um novo endereço, basta modificar o CEP e acrescentar o número e complemento")
 		}
-		
-		console.log(Teste);
-		console.log(alunos);
 	}
 
 	useEffect(()=>{
@@ -59,9 +57,13 @@ function Cadastrar(){
 	setCep(cep);
  }
 
- async function Completar(){
+ async function CompletarCEP(){
+	
 	const numero = `https://ws.apicep.com/cep/${Cep}.json`;
-	if(Cep.toString().length !== 8){alert("CEP inválido, o CEP contém 8 digitos! Coloque apenas números, sem '-' por favor")}else{
+
+	if(Cep.toString().length !== 8){
+		alert("CEP inválido, o CEP contém 8 digitos! Coloque apenas números, sem '-' por favor")
+	}else{
 		const dados = await fetch(numero);
 		const endereco = await dados.json()
 		if(!endereco.ok){
@@ -76,8 +78,8 @@ function Cadastrar(){
 				Estado: endereco.state
 				}
 			setDados([...Dados, informacao])
-			setContador(Contador+1);
-			console.log(Cep.toString().length)
+			setContador(Contador+1); //preciso resolver essa questão do contador, toda vez ele volta para o zero toda vez
+			// que um elemento for adicionado, porém ele não pode somar de um em um(quando um aluno for adicionado)
 		}
 		}
 	}
@@ -107,19 +109,20 @@ function Cadastrar(){
 		<label>
 			Dados residenciais dos responsáveis:
 		</label><br/>
-		<input onChange={CEP} onBlur={Completar} type="number" name="CEP" placeholder="CEP" value={Cep}/>
+		<input onChange={CEP} onBlur={CompletarCEP} type="number" name="CEP" placeholder="CEP" value={Cep}/>
 		<input onChange={()=>{console.log("Nada");}} type="text" name="Endereço" placeholder="Endereço" value={Dados[`${Contador}`].Endereco} /> <br/>
 		<input type="number" name="número da casa" placeholder="Nº"/> 
 		<input type="text" name="complemento" placeholder="complemento"/> <br/>
-		<input onChange={()=>{console.log("Nada");}} type="text" name="Cidade" placeholder="Cidade" value={Dados[`${Contador}`].Cidade}/>
-		<input onChange={()=>{console.log("Nada");}} type="text" name="Estado" placeholder="Estado" value={Dados[`${Contador}`].Estado}/>
+		<input onChange={()=>{}} type="text" name="Cidade" placeholder="Cidade" value={Dados[`${Contador}`].Cidade}/>
+		<input onChange={()=>{}} type="text" name="Estado" placeholder="Estado" value={Dados[`${Contador}`].Estado}/>
 		<br/>
 		<button onClick={addAluno} > cadastrar </button>
 		<button > <Link to="/menu">voltar</Link> </button>
+
 		</AreaCadastro>
 		</>
 	)
 }
 
 
-export {Cadastrar, Teste};
+export default Cadastrar;
