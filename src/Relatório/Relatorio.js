@@ -12,19 +12,19 @@ export default function Relatorio (){
         <AreaDeTabelas>
             <p>Relátorio de notas</p>
             <table>
-
-                <tr>
-                    <td>Número</td>
-                    <td>Estudantes</td>
-                    <td>Nota 1º TRI</td>
-                    <td>Nota 2º TRI</td>
-                    <td>Nota 3º TRI</td>
-                    <td>Média</td>
-                    <td>Final</td>
-                    <td>Média Final</td>
-                </tr>
-                <RelatorioAluno/>
-
+                <tbody>
+                    <tr>
+                        <td>Número</td>
+                        <td>Estudantes</td>
+                        <td>Nota 1º TRI</td>
+                        <td>Nota 2º TRI</td>
+                        <td>Nota 3º TRI</td>
+                        <td>Média</td>
+                        <td>Final</td>
+                        <td>Média Final</td>
+                    </tr>
+                    <RelatorioAluno/>
+                </tbody>
 
             </table>
             <button>Gerar Planilha</button>
