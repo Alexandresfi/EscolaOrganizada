@@ -18,13 +18,14 @@ export default function Faltas (props){
                 das faltas.</p>
 
             <table>
-                <tr>
-                    <td>Número</td>
-                    <td>Estudantes</td>
-                    <td>Faltas</td>
-                </tr>
-                <Alunos/>
-                
+                <tbody>
+                    <tr>
+                        <td>Número</td>
+                        <td>Estudantes</td>
+                        <td>Faltas</td>
+                    </tr>
+                    <Alunos/>
+                </tbody>
             </table>
             <button>Salvar</button>
             <button><Link to="frequencia">Salvar e Voltar</Link> </button>
