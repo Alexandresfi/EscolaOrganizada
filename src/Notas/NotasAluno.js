@@ -1,15 +1,17 @@
-import React from "react";
-import { Teste } from "../Cadastrar/Cadastrar";
+import React, { useContext } from "react";
+import { AlunoContext } from "../AlunoContext/alunoContext";
 
 
 export default function NotasAluno(props){
     
+    const [alunos] = useContext(AlunoContext)
     return(
         <>
-            {Teste.map(aluno=>{
+            
+            {alunos.map(aluno=>{
                 return(
                     <tr>
-                    <td> {Teste.indexOf(aluno)+1} </td>
+                    <td> {alunos.indexOf(aluno)+1} </td>
                     <td>{aluno}</td>
                     <td> <input type="number" name ="nota 1" placeholder="nota 1" className="notas"/> </td>
                     <td> <input type="number" name ="nota 2" placeholder="nota 2" className="notas"/> </td>
