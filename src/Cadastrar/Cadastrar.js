@@ -32,7 +32,7 @@ function Cadastrar(){
 		event.preventDefault()
 		if(nome) {
 			setAlunos([...alunos, nome]);
-			Teste=[...alunos, nome];
+			Teste=[...alunos, nome].sort();
 			setNome("");
 			setCep("");
 			alert("Atenção! Para cadastrar um novo endereço, basta modificar o CEP e acrescentar o número e complemento")
