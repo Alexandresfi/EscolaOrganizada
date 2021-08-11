@@ -1,15 +1,17 @@
-import React from "react";
-import { Teste} from "../Cadastrar/Cadastrar";
+import React, { useContext } from "react";
+import { AlunoContext } from "../AlunoContext/alunoContext";
 
 
 export default function Alunos(){
 
+    const [alunos] = useContext(AlunoContext)
+
     return(
         <>
-            {Teste.map((aluno, index)=>{
+            {alunos.map((aluno, index)=>{
                 return(
                     <tr key={index}>
-                    <td> {Teste.indexOf(aluno)+1} </td>
+                    <td> {alunos.indexOf(aluno)+1} </td>
                     <td>{aluno}</td>
                     <td> <input type="checkbox"  name="faltas"/> </td>
                     </tr>
