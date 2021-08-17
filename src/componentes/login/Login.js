@@ -7,10 +7,16 @@ function Login (prosp){
             <h1>{prosp.Titulo}</h1>
             <p>{prosp.Subtitulo}</p>
             <form>
-            <label className="a">Login:</label>
-            <input type = "email" name="email" placeholder="coloque seu e-mail"></input> <br/>
-            <label>Senha:</label>
-            <input type="password" name="senha" placeholder="coloque sua senha"></input>
+            <label className="a">
+                Login:
+                <input type = "email" name="email" placeholder="E-mail"></input> <br/>
+            </label>
+
+            <label>
+                Senha:
+                <input type="password" name="senha" placeholder="Senha"></input>
+            </label>
+            
             <button type="submit">entrar</button>
         </form>
         <h5>{prosp.SI}</h5>

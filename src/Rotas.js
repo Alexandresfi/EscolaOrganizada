@@ -7,10 +7,14 @@ import Faltas from "./Faltas/Faltas";
 import Notas from './Notas/Notas';
 import Relatorio from './Relatório/Relatorio';
 import Menu from "./Menu/Menu";
+import { AlunoProvider } from "./AlunoContext/alunoContext";
 
 export default function Rotas (){
+    
     return(
         <Switch>
+
+            <AlunoProvider>
 
             <Route exact path="/">
                 <Login Titulo="Escola Organizada Sistema de Ensino" Subtitulo="Relatório Escolar" SI="Esqueceu a senha? Entre em contato com a secretária"/>
@@ -21,7 +25,7 @@ export default function Rotas (){
             </Route>
 
             <Route exact path="/cadastrar">
-                <Cadastrar nome="Cadastrar/Editar estudantes"/>
+                <Cadastrar  nome="Cadastrar/Editar estudantes"/>
             </Route>
 
             <Route exact path="/frequencia">
@@ -39,6 +43,8 @@ export default function Rotas (){
             <Route exact path="/relatorio">
                 <Relatorio/>
             </Route>
+            </AlunoProvider>
+
         </Switch>
     )
 
