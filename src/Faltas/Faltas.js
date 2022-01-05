@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Alunos from "./Alunos";
 import { AreaDeTabelas } from "./styled";
-import Header from "../Header/Header"
+import Header from "../Components/Header/Header";
 
 
 

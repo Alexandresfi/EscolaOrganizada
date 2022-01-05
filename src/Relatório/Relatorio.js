@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { AreaDeTabelas } from "../Faltas/styled"
 import RelatorioAluno from "./RelatorioAluno"
-import Header from "../Header/Header"
+import Header from "../Components/Header/Header"
 
 
 export default function Relatorio (){

@@ -5,7 +5,7 @@ import Ca from "../links/Ca";
 import Frequencia from "../links/Freq";
 import No from "../links/No";
 import Rela from "../links/Rela"
-import Header from "../Header/Header";
+import Header from "../Components/Header/Header";
 
 
 function Menu (){

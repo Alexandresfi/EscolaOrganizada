@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Header from "../Header/Header"
+import Header from "../Components/Header/Header"
 import { AreaDeTabelas } from "../Faltas/styled"
 import NotasAluno from "./NotasAluno"
 

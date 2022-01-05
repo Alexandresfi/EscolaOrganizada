@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import {AreaCadastro} from "./styled";
-import Header from "../Header/Header";
+import Header from "../Components/Header/Header";
 import { AlunoContext } from "../AlunoContext/alunoContext";
 
 

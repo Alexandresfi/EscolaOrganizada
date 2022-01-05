@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {AreaLogin} from "./styled";
 
 function Login (prosp){
@@ -17,7 +18,10 @@ function Login (prosp){
                 <input type="password" name="senha" placeholder="Senha"></input>
             </label>
             
-            <button type="submit">entrar</button>
+            <button>
+                <Link to='/menu'>Entrar</Link>
+            </button>
+            
         </form>
         <h5>{prosp.SI}</h5>
         </AreaLogin>
