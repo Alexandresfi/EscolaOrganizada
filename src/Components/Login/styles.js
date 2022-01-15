@@ -72,7 +72,7 @@ export const ButtonLoginGoogle = styled.button`
     }
 `
 
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.form`
     width: 33.625rem;
     height: 24.625rem;
 

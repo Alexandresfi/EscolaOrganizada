@@ -32,20 +32,21 @@ export function Login() {
                     <TextField
                         id="standard-textarea"
                         label="E-mail"
+                        type="email"
                         placeholder="colegio@exemplo.com"
                         required
-                        multiline
                     />
 
                     <TextField
                         id="standard-textarea"
                         label="Senha"
+                        type='password'
                         placeholder="Sua Senha"
                         required
-                        multiline
+                        
                     />
 
-                    <button>
+                    <button type="submit">
                         <Link to='/menu'>
                         Fazer Login
                         </Link>
