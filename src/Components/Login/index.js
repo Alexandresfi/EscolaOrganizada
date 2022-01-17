@@ -43,12 +43,12 @@ export function Login() {
                         type='password'
                         placeholder="Sua Senha"
                         required
-                        
+
                     />
 
                     <button type="submit">
                         <Link to='/menu'>
-                        Fazer Login
+                            Login
                         </Link>
                     </button>
 

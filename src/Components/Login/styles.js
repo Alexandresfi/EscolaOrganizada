@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width: 78.81rem;
+    
     
     margin: 11vh auto;
 
@@ -10,8 +10,8 @@ export const Container = styled.div`
 `
 
 export const BoxLef = styled.div`
-    width: 35.875rem;
-    height: 80vh;
+    width: 35vw;
+    height: 78vh;
 
     display: flex;
     justify-content: center;
@@ -20,6 +20,10 @@ export const BoxLef = styled.div`
     background: linear-gradient(90deg, #682338 47.64%, rgba(104, 35, 56, 0) 98.57%);
 
     border-radius: 29px 0px 0px 29px;
+
+    @media(max-width: 720px){
+        display: none;
+    }
 `
 
 export const H1Login = styled.h1`
@@ -34,7 +38,7 @@ export const H1Login = styled.h1`
 `
 
 export const BoxRight = styled.div`
-    width: 44.25rem;
+    width: 40vw;
 
     background: linear-gradient(109.13deg, rgba(239, 239, 239, 0.03) 3.12%, rgba(239, 239, 239, 0.1) 89.96%, rgba(239, 239, 239, 0.174015) 89.96%);
     backdrop-filter: blur(20px);
@@ -44,12 +48,15 @@ export const BoxRight = styled.div`
     flex-direction: column;
     justify-content: center;
 
+    @media(max-width: 720px){
+        height: 70vh;
+        width: 90vw;
+    }
+
 `
 
 export const ButtonLoginGoogle = styled.button`
-    width: 24rem;
-    height: 4rem;
-    margin: auto;
+    margin: 3rem auto 0 auto;
 
     display: flex;
     justify-content: space-between;
@@ -59,7 +66,8 @@ export const ButtonLoginGoogle = styled.button`
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
-    font-size: 2.11rem;
+    font-size: 1.5rem;
+    padding: 5px;
 
     background: #FFFFFF;
     box-shadow: 0px 0px 2.41919px rgba(0, 0, 0, 0.084), 0px 2.41919px 2.41919px rgba(0, 0, 0, 0.168);
@@ -73,7 +81,6 @@ export const ButtonLoginGoogle = styled.button`
 `
 
 export const ContainerForm = styled.form`
-    width: 33.625rem;
     height: 24.625rem;
 
     margin: auto;
@@ -109,7 +116,6 @@ export const ContainerForm = styled.form`
         font-family: Poppins;
         font-style: normal;
         font-weight: normal;
-        font-size: 18px;
         line-height: 27px;
 
         margin: 0 auto;
