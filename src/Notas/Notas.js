@@ -1,13 +1,10 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import Header from "../Components/Header/Header"
 import { AreaDeTabelas } from "../Faltas/styled"
 import NotasAluno from "./NotasAluno"
 
 export default function Notas (){
     return(
-        <>
-        <Header/>
         <AreaDeTabelas>
             <p>Selecione o trimestre</p>
 
@@ -37,6 +34,5 @@ export default function Notas (){
                 <button> <Link to="/menu"> Salvar e Voltar</Link></button>
             </div>
         </AreaDeTabelas>
-        </>
     )
 }
