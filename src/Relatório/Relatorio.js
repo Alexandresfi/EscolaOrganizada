@@ -2,13 +2,9 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { AreaDeTabelas } from "../Faltas/styled"
 import RelatorioAluno from "./RelatorioAluno"
-import Header from "../Components/Header/Header"
-
 
 export default function Relatorio (){
     return(
-        <section>
-        <Header/>
         <AreaDeTabelas>
             <p>Relátorio de notas</p>
             <table>
@@ -30,6 +26,5 @@ export default function Relatorio (){
             <button><Link to="/menu">Voltar</Link></button>
         </AreaDeTabelas>
 
-        </section>
     )
 }

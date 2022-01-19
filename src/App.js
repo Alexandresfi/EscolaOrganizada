@@ -7,9 +7,7 @@ import { GlobalStyle } from './Components/global';
 function App() {
   return (
     <BrowserRouter>
-      <Rotas>
-        
-      </Rotas>
+      <Rotas />
       <GlobalStyle/>
     </BrowserRouter>
     

@@ -1,13 +1,9 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { ConteudoFrequecia } from "./styled"
-import Header from "../Components/Header/Header"
 
 export default function Fre (){
     return(
-        <>
-        <Header/>
-
         <section className="frequencia" >
             <h3> Resistro de Conteúdos e frêquencia das aulas</h3>
             
@@ -43,6 +39,5 @@ export default function Fre (){
             </ConteudoFrequecia>
 
         </section>
-        </>
     )
 }
