@@ -47,7 +47,7 @@ export function Login() {
                     />
 
                     <button type="submit">
-                        <Link to='/menu'>
+                        <Link to='/home'>
                             Login
                         </Link>
                     </button>

@@ -5,6 +5,7 @@ import Ca from "../links/Ca";
 import Frequencia from "../links/Freq";
 import No from "../links/No";
 import Rela from "../links/Rela"
+import { CardHome } from "../Components/Card";
 
 function Menu() {
     return (
@@ -21,6 +22,8 @@ function Menu() {
                 </AreaFrquencia>
             </Link>
 
+            <CardHome />
+
             <Link to="notas">
                 <AreaNotas>
                     <No name="Cadastrar/Editar Notas" />
@@ -33,6 +36,8 @@ function Menu() {
                     <Rela />
                 </AreaRelatorio>
             </Link>
+
+            
 
         </Secao>
     )

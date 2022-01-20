@@ -5,6 +5,7 @@ import GithubImg from "../../assects/Github.png"
 
 
 export function TitleDefaults() {
+    
     return (
         <Container>
             <Content>
@@ -18,6 +19,9 @@ export function TitleDefaults() {
             </Content>
 
             <Content>
+                {/* <li>
+                    { new Intl.DateTimeFormat('pt-Br').format( new Date())}
+                </li> */}
                 <li>
                     <a href="https://www.linkedin.com/in/alexandre-nascimento-66692920a/">
                         <img src={LinkdinImg} alt='Linkedin' />
