@@ -23,7 +23,10 @@ export function Header() {
 
     return (
         <Container>
-            <img src={LogoImg} atl="Logo Escola Organizada" width='200px' />
+            <Link to='/home'>
+                <img src={LogoImg} alt="Logo Escola Organizada" width='200px' />
+            </Link>
+
 
             <UlHeader>
                 <li>

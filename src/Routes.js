@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 // import Login from './componentes/login/Login';
 import Cadastrar from './Cadastrar/Cadastrar';
@@ -9,10 +9,12 @@ import Relatorio from './Relatório/Relatorio';
 import Menu from "./Menu/Menu";
 import { AlunoProvider } from "./AlunoContext/alunoContext";
 import { Login } from "./Components/Login";
-import { Header } from "./Components/Header/Header";
+import { Header } from "./Components/Header";
 import { TitleDefaults } from "./Components/TitleDefault";
+import { Home } from "./Components/Home";
+import { Teacher } from "./Components/TeacherManagement";
 
-export default function Rotas() {
+export function Rotas() {
 
     return (
         <Switch>
@@ -24,11 +26,17 @@ export default function Rotas() {
                     {/* <Login Titulo="Escola Organizada Sistema de Ensino" Subtitulo="Relatório Escolar" SI="Esqueceu a senha? Entre em contato com a secretária"/> */}
                     <Login />
                 </Route>
+
                 <Header />
+
                 <TitleDefaults />
                 <Route exact path="/menu">
                     <Menu />
                 </Route>
+
+                <Route exact path='/home' component={Home} />
+
+                <Route exact path='/teacher' component={Teacher} />
 
                 <Route exact path="/cadastrar">
                     <Cadastrar nome="Cadastrar/Editar estudantes" />
