@@ -1,10 +1,9 @@
-import React from "react";
-import { Container, Content } from "./styles";
+import React, { useEffect } from "react";
+import { Container, Content, PLocalidation } from "./styles";
 import LinkdinImg from "../../assects/Linkedin.png"
 import GithubImg from "../../assects/Github.png"
 import { useLocation } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import { useEffect } from "react";
 import { ButtonHearder } from "../Header/styled";
 
 
@@ -16,10 +15,8 @@ export function TitleDefaults() {
 
     useEffect(() => {
         setTitle([...title, localidation.pathname.split('/')[1]])
-        console.log(title)
         localidation.pathname === '/home' && setTitle([])
     }, [localidation.pathname])
-
 
 
     return (
@@ -34,14 +31,14 @@ export function TitleDefaults() {
                 </li>
 
                 <li>
-                    {localidation.pathname !== '/home' && (<p>| Você está aqui: </p>)}
+                    {localidation.pathname !== '/home' && (<PLocalidation>| Você está aqui:</PLocalidation>)}
                 </li>
 
                 <li>
                     {localidation.pathname !== '/home' && (
                         <>
                             {title?.map((item, index) => (
-                                <span key={index}> {item} </span>
+                                <PLocalidation key={index}> {item} </PLocalidation>
                             ))}
                         </>
                     )}
