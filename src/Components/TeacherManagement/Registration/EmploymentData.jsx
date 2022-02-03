@@ -16,11 +16,13 @@ function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export function EmploymentData({ formik, updatePageProgress }) {
+export function EmploymentData({ formik}) {
 
     const [errorCPF, setErrorCPF] = React.useState(false)
     const [open, setOpen] = React.useState(false)
     const history = useHistory()
+
+    const time = 1000
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -140,12 +142,11 @@ export function EmploymentData({ formik, updatePageProgress }) {
                     setOpen(true)
                     console.log(formik.values)
                     setTimeout(() => {
-                        formik.setValues()
-                    history.push('/home')
-                    }, '3m');
+                        history.push('/home')
+                    }, time)
                     
                 }}
-                
+                disabled={(!errorCPF && formik.values.rg && formik.values.numberCard && formik.values.training_institution && formik.values.titles && formik.values.training_date) ? false: true}
             >
                 Finalizar Cadastro
             </ButtonGo>

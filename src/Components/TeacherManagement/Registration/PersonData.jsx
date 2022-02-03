@@ -81,6 +81,7 @@ export function PersonData({formik,  updatePageProgress}) {
                     id="birthdate"
                     type="date"
                     variant='outlined'
+                    required
                     autoComplete={false}
                     InputLabelProps={{
                         shrink: true,

@@ -134,7 +134,7 @@ export function AddressData({ formik, updatePageProgress }) {
 
             <ButtonGo
                 onClick={()=> updatePageProgress(2, 100)}
-                // disabled={(formik.values.address && formik.values.housenumber && formik.values.district && formik.values.city && formik.values.state) ? false : true}
+                disabled={(!formik.values.address && formik.values.complement && formik.values.housenumber && formik.values.district && formik.values.city && formik.values.state) ? false : true}
             >
                 Avançar
             </ButtonGo>
