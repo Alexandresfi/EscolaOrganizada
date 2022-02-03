@@ -1,38 +1,28 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Switch, Route } from "react-router-dom";
-// import Login from './componentes/login/Login';
 import Cadastrar from './Cadastrar/Cadastrar';
 import Fre from './Fre/Frquencia';
 import Faltas from "./Faltas/Faltas";
 import Notas from './Notas/Notas';
 import Relatorio from './Relatório/Relatorio';
-import Menu from "./Menu/Menu";
 import { AlunoProvider } from "./AlunoContext/alunoContext";
 import { Login } from "./Components/Login";
 import { Header } from "./Components/Header";
-import { TitleDefaults } from "./Components/TitleDefault";
 import { Home } from "./Components/Home";
 import { Teacher } from "./Components/TeacherManagement";
+import { useLocation } from "react-router-dom";
 
 export function Rotas() {
+    const localidation = useLocation()
 
     return (
         <Switch>
 
-
             <AlunoProvider>
 
-                <Route exact path="/">
-                    {/* <Login Titulo="Escola Organizada Sistema de Ensino" Subtitulo="Relatório Escolar" SI="Esqueceu a senha? Entre em contato com a secretária"/> */}
-                    <Login />
-                </Route>
+                <Route exact path='/' component={Login} />
 
-                <Header />
-
-                <TitleDefaults />
-                <Route exact path="/menu">
-                    <Menu />
-                </Route>
+                {localidation.pathname !== '/' && <Header />}
 
                 <Route exact path='/home' component={Home} />
 
@@ -57,6 +47,7 @@ export function Rotas() {
                 <Route exact path="/relatorio">
                     <Relatorio />
                 </Route>
+
             </AlunoProvider>
 
         </Switch>

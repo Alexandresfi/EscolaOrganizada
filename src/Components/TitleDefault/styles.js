@@ -21,3 +21,8 @@ export const Content = styled.ul`
 
 `
 
+export const PLocalidation = styled.p`
+    color: white;
+    font-size: .85rem;
+`
+

@@ -1,6 +1,7 @@
 import React from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
 import { Container, H1 } from "./styles";
+import { Registration } from "./Registration";
 
 export function Teacher() {
 
@@ -34,6 +35,8 @@ export function Teacher() {
                     })}
                 />
             </div>
+            {typeAction.create && <Registration/> }
+            
         </Container>
     )
 }
