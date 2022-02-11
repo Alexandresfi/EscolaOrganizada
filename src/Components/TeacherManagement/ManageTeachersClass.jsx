@@ -7,6 +7,14 @@ import { UlHeader } from "../Header/styled";
 export function ManageTeachersClass() {
 
     const [show, setShow] = React.useState(false)
+    const [dataSeries, setDataSeries] = React.useState({
+        id: null,
+        teacher: '',
+        subjects: '',
+        series: [
+            { ano: '', turma: '' },
+        ],
+    })
     const [settingData, setSettingData] = React.useState({
         isCreate: false,
         isUpdate: false
@@ -16,43 +24,69 @@ export function ManageTeachersClass() {
             id: 1,
             teacher: 'Alexandre Nascimento',
             subjects: 'Matemática',
-            serie: '7º ano B',
+            series: [
+                { ano: '7', turma: 'A' },
+                { ano: '9', turma: 'C' }
+
+            ],
 
         },
         {
             id: 2,
             teacher: 'Isa Viviane',
             subjects: 'Música',
-            serie: '3º serie A',
+            series: [
+                { ano: '6', turma: 'A' },
+                { ano: '8', turma: 'C' }
+
+            ],
 
         },
         {
             id: 3,
             teacher: 'Ribmar',
             subjects: 'Biologia',
-            serie: '6º ano C',
+            series: [
+                { ano: '7', turma: 'B' }
+            ],
 
         },
         {
             id: 4,
             teacher: 'Lucas',
             subjects: 'Geografia',
-            serie: '9º ano A e 7º ano C',
+            series: [
+                { ano: 7, turma: 'B' },
+                { ano: 9, turma: 'A' }
+
+            ],
 
         },
         {
             id: 5,
             teacher: 'Wesley Batista',
             subjects: 'História',
-            serie: '8º ano C',
+            series: [
+                { ano: 7, turma: 'A' },
+                { ano: 9, turma: 'C' }
+            ],
 
         },
     ])
 
     const handleClose = () => {
         setShow(false);
-        setSettingData({...settingData, isCreate: false, isUpdate: false})
+        setSettingData({ ...settingData, isCreate: false, isUpdate: false })
     };
+
+    const findSeries = (id) => {
+        setDataSeries(teacherData.find(sala => sala.id === id))
+    }
+
+    const deleteSerie = (turma) => {
+        dataSeries.series.splice(turma, 1)
+        setDataSeries(dataSeries)
+    }
 
     return (
         <>
@@ -91,7 +125,11 @@ export function ManageTeachersClass() {
                                 </TableCell>
 
                                 <TableCell align="center">
-                                    {teacher.serie}
+                                    {teacher.series?.map((serie, index) => (
+                                        <ul>
+                                            <li key={index}>{`${serie.ano}${serie.ano < 10 ? ' ºano' : ' Serie'} ${serie.turma}`}</li>
+                                        </ul>
+                                    ))}
                                 </TableCell>
 
                                 <TableCell align="center">
@@ -101,26 +139,27 @@ export function ManageTeachersClass() {
                                             size="small"
                                             color="primary"
                                             aria-label="add"
-                                            onClick={()=>{
+                                            onClick={() => {
                                                 setShow(true)
-                                                setSettingData({...settingData, isCreate: true})
+                                                setSettingData({ ...settingData, isCreate: true })
                                             }}
-                                            >
-                                            <AddIcon />
+                                        >
+                                            <AddIcon fontSize="small" />
                                         </Fab>
                                     </Tooltip>
                                     {' '}
                                     <Tooltip title='editar'>
-                                        <Fab 
-                                        size="small" 
-                                        color="secondary" 
-                                        aria-label="edit"
-                                        onClick={()=>{
-                                            setShow(true)
-                                            setSettingData({...settingData, isUpdate: true})
-                                        }}
+                                        <Fab
+                                            size="small"
+                                            color="secondary"
+                                            aria-label="edit"
+                                            onClick={() => {
+                                                setShow(true)
+                                                setSettingData({ ...settingData, isUpdate: true })
+                                                findSeries(teacher.id)
+                                            }}
                                         >
-                                            <EditIcon />
+                                            <EditIcon fontSize="small" />
                                         </Fab>
                                     </Tooltip>
 
@@ -139,7 +178,10 @@ export function ManageTeachersClass() {
                 ria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle>
+                <DialogTitle
+                    style={{ background: '#2b2d42', color: 'white', textAlign: 'right' }}
+                >
+
                     {settingData.isCreate && (
                         <>
                             <p>Professor(a)</p>
@@ -155,11 +197,16 @@ export function ManageTeachersClass() {
                     )}
                 </DialogTitle>
 
-                <DialogContent>
-                    
-                        <>
+                <DialogContent
+                    style={{ background: '#666666' }}
+                >
+
+                    <>
+                        {dataSeries.series?.map((serie) => (
                             <UlHeader>
                                 <li>
+
+
                                     <FormControl>
                                         <InputLabel className="color">Serie/Ano:</InputLabel>
 
@@ -167,7 +214,7 @@ export function ManageTeachersClass() {
                                             className='width-small color'
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                        // value={series}
+                                            value={serie.ano}
                                         // onChange={handleChangeSeries}
                                         >
                                             <MenuItem value={1} > 1º Ano </MenuItem>
@@ -194,36 +241,43 @@ export function ManageTeachersClass() {
                                             className='width-small color'
                                             labelId="demo-simple-select-label"
                                             id="demo-simple-select"
-                                        // value={schoolClass}
+                                            value={serie.turma}
                                         // onChange={handleChangeClass}
                                         >
-                                            <MenuItem value='a'> A </MenuItem>
-                                            <MenuItem value='b'> B </MenuItem>
-                                            <MenuItem value='c' > C </MenuItem>
+                                            <MenuItem value='A'> A </MenuItem>
+                                            <MenuItem value='B'> B </MenuItem>
+                                            <MenuItem value='C'> C </MenuItem>
 
                                         </Select>
                                     </FormControl>
                                 </li>
                                 {settingData.isUpdate && (
-                                    <Button color="secondary" >Remover turma</Button>
+                                    <Button color="secondary"
+                                        onClick={() => {
+                                            deleteSerie(serie.turma)
+                                            console.log(dataSeries)
+                                        }}
+                                    > Remover turma </Button>
                                 )}
                             </UlHeader>
+                        ))}
 
-                             <Button 
-                            onClick={()=>{
-                                setSettingData({isCreate: false, isUpdate: false})
+
+                        <Button
+                            onClick={() => {
+                                setSettingData({ isCreate: false, isUpdate: false })
                                 handleClose()
                             }}
-                            >
-                                Cancelar
-                            </Button>
+                        >
+                            Cancelar
+                        </Button>
 
-                            <Button >
-                                Salvar
-                            </Button>
-                           
-                        </>
-                    
+                        <Button >
+                            Salvar
+                        </Button>
+
+                    </>
+
                 </DialogContent>
 
             </Dialog>
