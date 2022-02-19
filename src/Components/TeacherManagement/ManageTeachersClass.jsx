@@ -1,5 +1,23 @@
 import React from "react";
-import { Box, Button, Dialog, DialogContent, DialogTitle, Fab, FormControl, InputLabel, MenuItem, Paper, Select, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip } from "@material-ui/core";
+import {
+    Button,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Fab,
+    FormControl,
+    InputLabel,
+    MenuItem,
+    Paper,
+    Select,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
+    Tooltip
+} from "@material-ui/core";
 import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import { UlHeader } from "../Header/styled";
@@ -27,9 +45,7 @@ export function ManageTeachersClass() {
             series: [
                 { ano: '7', turma: 'A' },
                 { ano: '9', turma: 'C' }
-
             ],
-
         },
         {
             id: 2,
@@ -38,9 +54,7 @@ export function ManageTeachersClass() {
             series: [
                 { ano: '6', turma: 'A' },
                 { ano: '8', turma: 'C' }
-
             ],
-
         },
         {
             id: 3,
@@ -49,7 +63,6 @@ export function ManageTeachersClass() {
             series: [
                 { ano: '7', turma: 'B' }
             ],
-
         },
         {
             id: 4,
@@ -58,9 +71,7 @@ export function ManageTeachersClass() {
             series: [
                 { ano: 7, turma: 'B' },
                 { ano: 9, turma: 'A' }
-
             ],
-
         },
         {
             id: 5,
@@ -70,7 +81,6 @@ export function ManageTeachersClass() {
                 { ano: 7, turma: 'A' },
                 { ano: 9, turma: 'C' }
             ],
-
         },
     ])
 
@@ -85,7 +95,11 @@ export function ManageTeachersClass() {
 
     const deleteSerie = (turma) => {
         dataSeries.series.splice(turma, 1)
-        setDataSeries(dataSeries)
+        setDataSeries({ ...dataSeries })
+    }
+
+    const createSerie = () => {
+        
     }
 
     return (
@@ -200,86 +214,135 @@ export function ManageTeachersClass() {
                 <DialogContent
                     style={{ background: '#666666' }}
                 >
+                    {
+                        settingData.isUpdate && (
+                            <>
+                                {dataSeries.series?.map((serie) => (
+                                    <UlHeader>
+                                        <li>
+                                            <FormControl>
+                                                <InputLabel className="color">Serie/Ano:</InputLabel>
 
-                    <>
-                        {dataSeries.series?.map((serie) => (
-                            <UlHeader>
-                                <li>
+                                                <Select
+                                                    className='width-small color'
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={serie.ano}
+                                                // onChange={handleChangeSeries}
+                                                >
+                                                    <MenuItem value={1} > 1º Ano </MenuItem>
+                                                    <MenuItem value={2}> 2º Ano </MenuItem>
+                                                    <MenuItem value={3} > 3º Ano </MenuItem>
+                                                    <MenuItem value={4}> 4º Ano </MenuItem>
+                                                    <MenuItem value={5}> 5º Ano </MenuItem>
+                                                    <MenuItem value={6}> 6º Ano </MenuItem>
+                                                    <MenuItem value={7}> 7º Ano </MenuItem>
+                                                    <MenuItem value={8}> 8º Ano </MenuItem>
+                                                    <MenuItem value={9}> 9º Ano </MenuItem>
+                                                    <MenuItem value={10}> 1ª Serie </MenuItem>
+                                                    <MenuItem value={11}> 2º Serie </MenuItem>
+                                                    <MenuItem value={12}> 3º Serie </MenuItem>
+                                                </Select>
+                                            </FormControl>
+                                        </li>
 
+                                        <li>
+                                            <FormControl>
+                                                <InputLabel className="color">Turma:</InputLabel>
 
-                                    <FormControl>
-                                        <InputLabel className="color">Serie/Ano:</InputLabel>
+                                                <Select
+                                                    className='width-small color'
+                                                    labelId="demo-simple-select-label"
+                                                    id="demo-simple-select"
+                                                    value={serie.turma}
+                                                // onChange={handleChangeClass}
+                                                >
+                                                    <MenuItem value='A'> A </MenuItem>
+                                                    <MenuItem value='B'> B </MenuItem>
+                                                    <MenuItem value='C'> C </MenuItem>
 
-                                        <Select
-                                            className='width-small color'
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={serie.ano}
-                                        // onChange={handleChangeSeries}
-                                        >
-                                            <MenuItem value={1} > 1º Ano </MenuItem>
-                                            <MenuItem value={2}> 2º Ano </MenuItem>
-                                            <MenuItem value={3} > 3º Ano </MenuItem>
-                                            <MenuItem value={4}> 4º Ano </MenuItem>
-                                            <MenuItem value={5}> 5º Ano </MenuItem>
-                                            <MenuItem value={6}> 6º Ano </MenuItem>
-                                            <MenuItem value={7}> 7º Ano </MenuItem>
-                                            <MenuItem value={8}> 8º Ano </MenuItem>
-                                            <MenuItem value={9}> 9º Ano </MenuItem>
-                                            <MenuItem value={10}> 1ª Serie </MenuItem>
-                                            <MenuItem value={11}> 2º Serie </MenuItem>
-                                            <MenuItem value={12}> 3º Serie </MenuItem>
-                                        </Select>
-                                    </FormControl>
-                                </li>
+                                                </Select>
+                                            </FormControl>
+                                        </li>
+                                        {settingData.isUpdate && (
+                                            <Button color="secondary"
+                                                onClick={() => {
+                                                    deleteSerie(serie.turma)
+                                                }}
+                                            > Remover turma </Button>
+                                        )}
+                                    </UlHeader>
+                                ))}
+                            </>
+                        )}
 
-                                <li>
-                                    <FormControl>
-                                        <InputLabel className="color">Turma:</InputLabel>
+                    {
+                        settingData.isCreate && (
+                            <>
+                                <UlHeader>
+                                    <li>
+                                        <FormControl>
+                                            <InputLabel className="color">Serie/Ano:</InputLabel>
 
-                                        <Select
-                                            className='width-small color'
-                                            labelId="demo-simple-select-label"
-                                            id="demo-simple-select"
-                                            value={serie.turma}
-                                        // onChange={handleChangeClass}
-                                        >
-                                            <MenuItem value='A'> A </MenuItem>
-                                            <MenuItem value='B'> B </MenuItem>
-                                            <MenuItem value='C'> C </MenuItem>
+                                            <Select
+                                                className='width-small color'
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                            // onChange={handleChangeSeries}
+                                            >
+                                                <MenuItem value={1} > 1º Ano </MenuItem>
+                                                <MenuItem value={2}> 2º Ano </MenuItem>
+                                                <MenuItem value={3} > 3º Ano </MenuItem>
+                                                <MenuItem value={4}> 4º Ano </MenuItem>
+                                                <MenuItem value={5}> 5º Ano </MenuItem>
+                                                <MenuItem value={6}> 6º Ano </MenuItem>
+                                                <MenuItem value={7}> 7º Ano </MenuItem>
+                                                <MenuItem value={8}> 8º Ano </MenuItem>
+                                                <MenuItem value={9}> 9º Ano </MenuItem>
+                                                <MenuItem value={10}> 1ª Serie </MenuItem>
+                                                <MenuItem value={11}> 2º Serie </MenuItem>
+                                                <MenuItem value={12}> 3º Serie </MenuItem>
+                                            </Select>
+                                        </FormControl>
+                                    </li>
 
-                                        </Select>
-                                    </FormControl>
-                                </li>
-                                {settingData.isUpdate && (
-                                    <Button color="secondary"
-                                        onClick={() => {
-                                            deleteSerie(serie.turma)
-                                            console.log(dataSeries)
-                                        }}
-                                    > Remover turma </Button>
-                                )}
-                            </UlHeader>
-                        ))}
+                                    <li>
+                                        <FormControl>
+                                            <InputLabel className="color">Turma:</InputLabel>
 
+                                            <Select
+                                                className='width-small color'
+                                                labelId="demo-simple-select-label"
+                                                id="demo-simple-select"
+                                            // onChange={handleChangeClass}
+                                            >
+                                                <MenuItem value='A'> A </MenuItem>
+                                                <MenuItem value='B'> B </MenuItem>
+                                                <MenuItem value='C'> C </MenuItem>
 
-                        <Button
-                            onClick={() => {
-                                setSettingData({ isCreate: false, isUpdate: false })
-                                handleClose()
-                            }}
-                        >
-                            Cancelar
-                        </Button>
+                                            </Select>
+                                        </FormControl>
+                                    </li>
 
-                        <Button >
-                            Salvar
-                        </Button>
+                                </UlHeader>
+                            </>
+                        )
+                    }
 
-                    </>
+                    <Button
+                        onClick={() => {
+                            handleClose()
+                        }}
+                    >
+                        Cancelar
+                    </Button>
 
+                    <Button
+                        onClick={handleClose}
+                    >
+                        Salvar
+                    </Button>
                 </DialogContent>
-
             </Dialog>
         </>
     )

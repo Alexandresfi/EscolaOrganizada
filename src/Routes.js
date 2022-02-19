@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import Cadastrar from './Cadastrar/Cadastrar';
 import Fre from './Fre/Frquencia';
 import Faltas from "./Faltas/Faltas";
@@ -10,7 +10,9 @@ import { Login } from "./Components/Login";
 import { Header } from "./Components/Header";
 import { Home } from "./Components/Home";
 import { Teacher } from "./Components/TeacherManagement";
-import { useLocation } from "react-router-dom";
+import { RegistrationParents } from "./Components/Responsibles";
+
+
 
 export function Rotas() {
     const localidation = useLocation()
@@ -27,6 +29,8 @@ export function Rotas() {
                 <Route exact path='/home' component={Home} />
 
                 <Route exact path='/teacher' component={Teacher} />
+
+                <Route exact path='/parentes' component={RegistrationParents} />
 
                 <Route exact path="/cadastrar">
                     <Cadastrar nome="Cadastrar/Editar estudantes" />
