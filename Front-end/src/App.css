@@ -1,0 +1,33 @@
+body{
+  background-color: #2b2d42;
+  color: #edf2f4;
+}
+
+.notas{
+  width: 55px;
+  text-align: center;
+}
+
+.notasR{
+ width: 80px;
+ text-align: center;
+}
+
+a{text-decoration: none; color:black}
+
+.frequencia{
+    margin-top: 5vh;
+    margin-bottom: calc(10% - 400px);
+}
+
+.frequencia>h3{text-align: center;}
+
+select{
+  padding: 2.5px;
+  margin-right: 10px;
+}
+
+button{
+  border-style: none;
+  cursor: pointer;
+}
