@@ -1,7 +1,9 @@
 import { TextField } from "@material-ui/core";
 import React from "react";
 import { useHistory } from "react-router-dom";
-import { ButtonBack, ButtonGo, Content,} from "../styles";
+import { Content} from "../styles";
+import Button from "../../ButtonProceed";
+import ButtonBack from "../../ButtonBack";
 
 export function AddressData({ formik, updatePageProgress }) {
     const [errorCep, setErrorCep] = React.useState(false)
@@ -132,12 +134,12 @@ export function AddressData({ formik, updatePageProgress }) {
                 {formik.errors.state && formik.touched.state ? <span>{formik.errors.state}</span> : null}
             </Content>
 
-            <ButtonGo
+            <Button
                 onClick={()=> updatePageProgress(2, 100)}
                 disabled={(!formik.values.address && formik.values.complement && formik.values.housenumber && formik.values.district && formik.values.city && formik.values.state) ? false : true}
             >
                 Avançar
-            </ButtonGo>
+            </Button>
 
             <ButtonBack
              onClick={() => {

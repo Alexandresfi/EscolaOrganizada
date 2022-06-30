@@ -1,8 +1,9 @@
 import React from "react";
 import { TextField} from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { ButtonBack, ButtonGo, Content } from "../TeacherManagement/styles";
-
+import { Content } from "../TeacherManagement/styles";
+import ButtonBack from "../../../../src/Components/ButtonBack";
+import Button from "../../../../src/Components/ButtonProceed";
 
 export function PersonDataParents({formik,  updatePageProgress}) {
     const history = useHistory()
@@ -99,7 +100,7 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 {formik.errors.birthdate && formik.touched.birthdate ? <span>{formik.errors.birthdate}</span> : null}
             </Content>
 
-            <ButtonGo
+            <Button
                 variant="contained" color="primary"
                 onClick={()=> updatePageProgress(1, 50)}
                 disabled={
@@ -113,7 +114,7 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 }
             >
                 Avançar
-            </ButtonGo>
+            </Button>
 
             <ButtonBack
              onClick={() => {

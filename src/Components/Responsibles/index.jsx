@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import { Button } from "@material-ui/core";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Container, HearderProgress } from "../TeacherManagement/styles";
+import { AddressData } from "../TeacherManagement/Registration/AddressData";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -36,8 +37,10 @@ TabPanel.propTypes = {
 };
 
 const initialValues = {
-    responsible: '',
-    kinshi: '',
+    responsible_1: '',
+    kinshi_1: '',
+    responsible_2: '',
+    kinshi_2: '',
     emai: ' ',
     email_2: ' ',
     birthdate: '',
@@ -45,18 +48,22 @@ const initialValues = {
     telephone_2: '',
     cpf: '',
     zipCod: '',
-    stree: '',
+    street: '',
     housenumbe: '',
-    complemen: '',
-    cit: '',
-    distric: '',
-    stat: ''
+    complement: '',
+    city: '',
+    district: '',
+    state: ''
 }
 
 const validation = Yup.object().shape({
-    responsible: Yup.string()
+    responsible_1: Yup.string()
         .required('Este Campo é obrigatório'),
-    kinshi: Yup.string()
+    kinshi_1: Yup.string()
+        .required('Este Campo é obrigatório'),
+    responsible_2: Yup.string()
+        .required('Este Campo é obrigatório'),
+    kinshi_2: Yup.string()
         .required('Este Campo é obrigatório'),
     email: Yup.string().email().required('Este Campo é obrigatório'),
     birthdate: Yup.string().required('Este Campo é obrigatório'),
@@ -66,12 +73,12 @@ const validation = Yup.object().shape({
     zipCod: Yup.number()
         .min(8, 'o cep possui oito dígitos, apenas números sem pontos e -')
         .required('Este Campo é obrigatório'),
-    stree: Yup.string().required('Este Campo é obrigatório'),
+    street: Yup.string().required('Este Campo é obrigatório'),
     housenumbe: Yup.number().required('Este Campo é obrigatório'),
-    complemen: Yup.string().required('Este Campo é obrigatório'),
-    cit: Yup.string().required('Este Campo é obrigatório'),
-    distric: Yup.string().required('Este Campo é obrigatório'),
-    stat: Yup.string().required('Este Campo é obrigatório'),
+    complement: Yup.string().required('Este Campo é obrigatório'),
+    city: Yup.string().required('Este Campo é obrigatório'),
+    district: Yup.string().required('Este Campo é obrigatório'),
+    state: Yup.string().required('Este Campo é obrigatório'),
 })
 
 export function RegistrationParents() {
@@ -115,15 +122,6 @@ export function RegistrationParents() {
                 )}
 
                 {value === 3 && (<HearderProgress>
-                    <h1>Dados Residênciais do Respoável 2</h1>
-                    <Button onClick={() => UpdatePageProgress(1, 50)}
-                    >
-                        voltar
-                    </Button>
-                </HearderProgress>
-                )}
-
-                {value === 4 && (<HearderProgress>
                     <h1>Dados do Aluno</h1>
                     <Button onClick={() => UpdatePageProgress(1, 75)}
                     >
@@ -137,6 +135,10 @@ export function RegistrationParents() {
 
             <TabPanel value={value} index={0}>
                 <PersonDataParents formik={formik} updatePageProgress={UpdatePageProgress} />
+            </TabPanel>
+
+            <TabPanel value={value} index={2}>
+                <AddressData formik={formik} updatePageProgress={UpdatePageProgress} />
             </TabPanel>
 
         </Container>
