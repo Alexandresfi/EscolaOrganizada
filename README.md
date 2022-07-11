@@ -1,7 +1,7 @@
 <h1> Projeto em processo de atualização</h1>
 
 <p> Este projeto está sendo atualizado, tanto no layout quanto em funcionalidades,  o objetivo é deixa-lo dinâmico, as atualizações estão sendo feitas
-  via branchs e merges, a branch master contém as atualizações, caso você queira ver como está ficando você pode olhar a branch master.
+  via branchs e merges, a branch develop contém as atualizações, caso você queira ver como está ficando você pode olhar a branch master.
 </p>
 
 Este site é uma migração do projeto Relatorio-Escola para o React JS, a migração está em andamento. 
@@ -13,6 +13,7 @@ Parte técnica:
   <li> Styled-components </li>
   <li> Material-UI </li>
   <li> Hoocks </li>
+  <li> Gitflow </li>
   <li> API de consulta de CEP </li>
   <li> API de validação de CPF </li>
 </ul>
