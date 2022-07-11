@@ -8,7 +8,9 @@ import {
     TextField,
 } from '@material-ui/core'
 import { validate } from 'gerador-validador-cpf'
-import { ButtonBack, ButtonGo, Content } from '../styles'
+import { Content } from '../styles'
+import Button from '../../ButtonProceed'
+import ButtonBack from '../../ButtonBack'
 import MuiAlert from '@material-ui/lab/Alert';
 import { useHistory } from 'react-router-dom';
 
@@ -137,7 +139,7 @@ export function EmploymentData({ formik}) {
                 {formik.errors.training_date && formik.touched.training_date ? <span>{formik.errors.training_date}</span> : null}
             </Content>
 
-            <ButtonGo
+            <Button
                 onClick={() => {
                     setOpen(true)
                     console.log(formik.values)
@@ -146,10 +148,17 @@ export function EmploymentData({ formik}) {
                     }, time)
                     
                 }}
-                disabled={(!errorCPF && formik.values.rg && formik.values.numberCard && formik.values.training_institution && formik.values.titles && formik.values.training_date) ? false: true}
+                disabled={
+                    (!errorCPF && 
+                        formik.values.rg && 
+                        formik.values.numberCard && 
+                        formik.values.training_institution && 
+                        formik.values.titles && 
+                        formik.values.training_date) ? false: true
+                }
             >
                 Finalizar Cadastro
-            </ButtonGo>
+            </Button>
 
             <ButtonBack
                 type='submit'

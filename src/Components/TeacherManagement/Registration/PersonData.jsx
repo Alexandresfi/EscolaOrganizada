@@ -6,7 +6,9 @@ import {
     Select,
     TextField
 } from "@material-ui/core";
-import { ButtonBack, ButtonGo, Content } from "../styles";
+import { Content } from "../styles";
+import Button from "../../ButtonProceed";
+import ButtonBack from "../../ButtonBack";
 import { useHistory } from "react-router-dom";
 
 
@@ -107,13 +109,21 @@ export function PersonData({formik,  updatePageProgress}) {
 
             </Content>
 
-            <ButtonGo
+            <Button
                 variant="contained" color="primary"
                 onClick={()=> updatePageProgress(1, 50)}
-                disabled={(formik.values.fullname && formik.values.surname && formik.values.telephone && formik.values.email && formik.values.birthdate && formik.values.gener && !formik.errors.email) ? false: true}
+                disabled={
+                    (formik.values.fullname && 
+                        formik.values.surname && 
+                        formik.values.telephone && 
+                        formik.values.email && 
+                        formik.values.birthdate && 
+                        formik.values.gener && 
+                        !formik.errors.email) ? false: true
+                }
             >
                 Avançar
-            </ButtonGo>
+            </Button>
 
             <ButtonBack
              onClick={() => {
