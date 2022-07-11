@@ -112,7 +112,15 @@ export function PersonData({formik,  updatePageProgress}) {
             <Button
                 variant="contained" color="primary"
                 onClick={()=> updatePageProgress(1, 50)}
-                disabled={(formik.values.fullname && formik.values.surname && formik.values.telephone && formik.values.email && formik.values.birthdate && formik.values.gener && !formik.errors.email) ? false: true}
+                disabled={
+                    (formik.values.fullname && 
+                        formik.values.surname && 
+                        formik.values.telephone && 
+                        formik.values.email && 
+                        formik.values.birthdate && 
+                        formik.values.gener && 
+                        !formik.errors.email) ? false: true
+                }
             >
                 Avançar
             </Button>

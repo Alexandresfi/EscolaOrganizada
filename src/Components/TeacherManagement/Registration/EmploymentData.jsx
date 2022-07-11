@@ -148,7 +148,14 @@ export function EmploymentData({ formik}) {
                     }, time)
                     
                 }}
-                disabled={(!errorCPF && formik.values.rg && formik.values.numberCard && formik.values.training_institution && formik.values.titles && formik.values.training_date) ? false: true}
+                disabled={
+                    (!errorCPF && 
+                        formik.values.rg && 
+                        formik.values.numberCard && 
+                        formik.values.training_institution && 
+                        formik.values.titles && 
+                        formik.values.training_date) ? false: true
+                }
             >
                 Finalizar Cadastro
             </Button>

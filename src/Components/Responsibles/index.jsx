@@ -8,7 +8,8 @@ import Box from '@material-ui/core/Box';
 import { Button } from "@material-ui/core";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { Container, HearderProgress } from "../TeacherManagement/styles";
-import { AddressData } from "../TeacherManagement/Registration/AddressData";
+import { AddressData } from "../Responsibles/AddressData";
+import { StudentsData } from "./StudentsData";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -46,14 +47,19 @@ const initialValues = {
     birthdate: '',
     telephone_1: '',
     telephone_2: '',
-    cpf: '',
+    cpf_1: '',
+    cpf_2: '',
     zipCod: '',
     street: '',
     housenumbe: '',
     complement: '',
     city: '',
     district: '',
-    state: ''
+    state: '',
+    name_student: '',
+    birthdate_student: '',
+    scholl_Class_student: '',
+    scholl_year_student: '',
 }
 
 const validation = Yup.object().shape({
@@ -69,7 +75,8 @@ const validation = Yup.object().shape({
     birthdate: Yup.string().required('Este Campo é obrigatório'),
     telephone_1: Yup.string().required('Este Campo é obrigatório'),
     telephone_2: Yup.string().required('Este Campo é obrigatório'),
-    cpf: Yup.number().required('Este Campo é obrigatório'),
+    cpf_1: Yup.number().max(14, 'Máximo de 14 números').min(14, 'Minímo de 14 números').required('Este Campo é obrigatório'),
+    cpf_2: Yup.number().max(14, 'Máximo de 14 números').min(14, 'Minímo de 14 números').required('Este Campo é obrigatório'),
     zipCod: Yup.number()
         .min(8, 'o cep possui oito dígitos, apenas números sem pontos e -')
         .required('Este Campo é obrigatório'),
@@ -79,6 +86,12 @@ const validation = Yup.object().shape({
     city: Yup.string().required('Este Campo é obrigatório'),
     district: Yup.string().required('Este Campo é obrigatório'),
     state: Yup.string().required('Este Campo é obrigatório'),
+    studens: Yup.object().shape({
+        name: Yup.string().required('Este Campo é obrigatório'),
+        birthdate_student: Yup.string().required('Este Campo é obrigatório'),
+        scholl_year: Yup.number().required('Este Campo é obrigatório'),
+        scholl_Class: Yup.string()
+    })
 })
 
 export function RegistrationParents() {
@@ -102,29 +115,19 @@ export function RegistrationParents() {
     return (
         <Container>
             <>
-                {value === 0 && <h1>Dados do Respoável 1</h1>}
+                {value === 0 && <h1>Dados dos Responsaveis</h1>}
+
                 {value === 1 && (<HearderProgress>
-                    <h1>Dados do Respoável 2</h1>
-                    <Button onClick={() => UpdatePageProgress(0, 0)}
-                    >
+                    <h1>Dados Residenciais (Responsável Principal)</h1>
+                    <Button onClick={() => UpdatePageProgress(0, 0)}>
                         voltar
                     </Button>
                 </HearderProgress>
                 )}
 
                 {value === 2 && (<HearderProgress>
-                    <h1>Dados Residênciais do Respoável 1</h1>
-                    <Button onClick={() => UpdatePageProgress(1, 25)}
-                    >
-                        voltar
-                    </Button>
-                </HearderProgress>
-                )}
-
-                {value === 3 && (<HearderProgress>
                     <h1>Dados do Aluno</h1>
-                    <Button onClick={() => UpdatePageProgress(1, 75)}
-                    >
+                    <Button onClick={() => UpdatePageProgress(1, 25)}>
                         voltar
                     </Button>
                 </HearderProgress>
@@ -137,8 +140,12 @@ export function RegistrationParents() {
                 <PersonDataParents formik={formik} updatePageProgress={UpdatePageProgress} />
             </TabPanel>
 
-            <TabPanel value={value} index={2}>
+            <TabPanel value={value} index={1}>
                 <AddressData formik={formik} updatePageProgress={UpdatePageProgress} />
+            </TabPanel>
+            
+            <TabPanel value={value} index={2}>
+                <StudentsData formik={formik} updatePageProgress={UpdatePageProgress} />
             </TabPanel>
 
         </Container>

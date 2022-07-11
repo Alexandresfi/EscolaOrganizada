@@ -7,16 +7,24 @@ import ButtonBack from "../ButtonBack";
 import { phoneMask } from "../../utils/maskCellPhone";
 import { useState } from "react";
 import { useEffect } from "react";
+import { validate } from "gerador-validador-cpf";
+import { cpfMask } from "../../utils/maskCpf";
 
 
 export function PersonDataParents({formik,  updatePageProgress}) {
     const history = useHistory()
     const [cellNumber1, setCellNumber1] = useState()
     const [cellNumber2, setCellNumber2] = useState()
+    const [cpfNumber1, setCpfNumber1] = useState()
+    const [cpfNumber2, setCpfNumber2] = useState()
+    const [errorCpf_1, setErrorCpf_1] = useState(true)
+    const [errorCpf_2, setErrorCpf_2] = useState(true)
 
     useEffect(()=>{
-        formik.values.telephone_1 != '' && setCellNumber1(formik.values.telephone_1)
-        formik.values.telephone_2 != '' && setCellNumber2(formik.values.telephone_2) 
+        formik.values.telephone_1 !== '' && setCellNumber1(formik.values.telephone_1)
+        formik.values.telephone_2 !== '' && setCellNumber2(formik.values.telephone_2) 
+        formik.values.cpf_1 !== '' && setCpfNumber1(formik.values.cpf_1)
+        formik.values.cpf_2 !== '' && setCpfNumber2(formik.values.cpf_2) 
     },[])
 
     function handleChance1 (value) {
@@ -27,6 +35,18 @@ export function PersonDataParents({formik,  updatePageProgress}) {
     function handleChance2 (value) {
         setCellNumber2(phoneMask(value))
         formik.setFieldValue('telephone_2', value)
+    }
+
+    function handleCpf_1 (value) {
+        setCpfNumber1(cpfMask(value))
+        formik.setFieldValue('cpf_1', value)
+        setErrorCpf_1(validate(value))
+    }
+
+    function handleCpf_2 (value) {
+        setCpfNumber2(cpfMask(value))
+        formik.setFieldValue('cpf_2', value)
+        setErrorCpf_2(validate(value))
     }
 
     return (
@@ -43,6 +63,22 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 />
 
                 {formik.errors.responsible_1 && formik.touched.responsible_1 ? <span>{formik.errors.responsible_1}</span> : null}
+            </Content>
+
+            <Content>
+                <TextField
+                    label='CPF do(a) responsável principal:'
+                    id='cpf_1'
+                    variant='outlined'
+                    value={cpfNumber1}
+                    fullWidth
+                    required
+                    autoComplete={false}
+                    onChange={(event)=>{handleCpf_1(event.target.value)}}
+                />
+
+                {formik.errors.cpf_1 && formik.touched.cpf_1 ? <span>{formik.errors.cpf_1}</span> : null}
+                {!errorCpf_1 && <span style={{ color: '#ff0000', fontSize: '0.75rem'}}> CPF inválido</span>}
             </Content>
 
             <Content>
@@ -74,6 +110,22 @@ export function PersonDataParents({formik,  updatePageProgress}) {
             </Content>
 
             <Content>
+                        <TextField
+                            label='CPF do(a) responsável segundário:'
+                            id='cpf_2'
+                            variant='outlined'
+                            value={cpfNumber2}
+                            fullWidth
+                            required
+                            autoComplete={false}
+                            onChange={(event)=>{handleCpf_2(event.target.value)}}
+                        />
+        
+                        {formik.errors.cpf_2 && formik.touched.cpf_2 ? <span>{formik.errors.cpf_2}</span> : null}
+                        {!errorCpf_2 && <span style={{ color: '#ff0000', fontSize: '0.75rem'}}> CPF inválido</span>}
+            </Content>
+            
+            <Content>
                 <TextField
                     label='Parentesco responsável segundário:'
                     id="surname_2"
@@ -86,6 +138,7 @@ export function PersonDataParents({formik,  updatePageProgress}) {
 
                 {formik.errors.kinshi_2 && formik.touched.kinshi_2 ? <span>{formik.errors.kinshi_2}</span> : null}
             </Content>
+
 
             <Content>
                 <TextField
@@ -162,6 +215,7 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 }}
                 disabled={
                     (formik.values.responsible_1 && 
+                        errorCpf_1 && errorCpf_2 &&
                         formik.values.kinshi_1 && 
                         formik.values.responsible_2 && 
                         formik.values.kinshi_2 && 
