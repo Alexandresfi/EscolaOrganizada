@@ -11,6 +11,10 @@ import { Header } from "./Components/Header";
 import { Home } from "./Components/Home";
 import { Teacher } from "./Components/TeacherManagement";
 import { RegistrationParents } from "./Components/Responsibles";
+import { CardNotas } from "./Components/Notas";
+import { Education_1 } from "./Components/Notas/Pages/Education_1";
+import { Education_2 } from "./Components/Notas/Pages/Education_2";
+import { Education_3 } from "./Components/Notas/Pages/Education_3";
 
 
 
@@ -51,6 +55,14 @@ export function Rotas() {
                 <Route exact path="/relatorio">
                     <Relatorio />
                 </Route>
+
+                <Route exact path='/grades' component={CardNotas} />
+
+                <Route exact path='/education-1' component={Education_1} />
+
+                <Route exact path='/education-2' component={Education_2} />
+
+                <Route exact path='/education-3' component={Education_3} />
 
             </AlunoProvider>
 

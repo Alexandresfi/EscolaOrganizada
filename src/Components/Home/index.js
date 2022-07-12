@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { CardHome } from "../Card";
 
 export function Home() {
-    const [infoCards, setInfoCards] = React.useState([
+    const infoCards = [
         { 
             link: '/teacher',
             image: TeacherImg,
@@ -47,7 +47,7 @@ export function Home() {
             image: ImpressoraImg,
             title: 'Impressões'
         },
-    ])
+    ]
     return(
         <nav>
             <List>
