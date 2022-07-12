@@ -139,7 +139,6 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 {formik.errors.kinshi_2 && formik.touched.kinshi_2 ? <span>{formik.errors.kinshi_2}</span> : null}
             </Content>
 
-
             <Content>
                 <TextField
                     label='Celular responsável principal'
@@ -189,6 +188,21 @@ export function PersonDataParents({formik,  updatePageProgress}) {
                 />
 
                 {formik.errors.email && formik.touched.email ? <span>{formik.errors.email}</span> : null}
+            </Content>
+
+            <Content>
+                <TextField
+                    label='E-mail responsável secundário'
+                    id='email_2'
+                    variant='outlined'
+                    type="email"
+                    autoComplete={false}
+                    fullWidth
+                    required
+                    {...formik.getFieldProps('email_2')}
+                />
+
+                {formik.errors.email_2 && formik.touched.email_2 ? <span>{formik.errors.email_2}</span> : null}
             </Content>
 
             <Content>

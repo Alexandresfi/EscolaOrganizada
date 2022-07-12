@@ -42,7 +42,7 @@ const initialValues = {
     kinshi_1: '',
     responsible_2: '',
     kinshi_2: '',
-    emai: ' ',
+    email: ' ',
     email_2: ' ',
     birthdate: '',
     telephone_1: '',
@@ -86,12 +86,10 @@ const validation = Yup.object().shape({
     city: Yup.string().required('Este Campo é obrigatório'),
     district: Yup.string().required('Este Campo é obrigatório'),
     state: Yup.string().required('Este Campo é obrigatório'),
-    studens: Yup.object().shape({
-        name: Yup.string().required('Este Campo é obrigatório'),
-        birthdate_student: Yup.string().required('Este Campo é obrigatório'),
-        scholl_year: Yup.number().required('Este Campo é obrigatório'),
-        scholl_Class: Yup.string()
-    })
+    name_student: Yup.string().required('Este Campo é obrigatório'),
+    birthdate_student: Yup.string().required('Este Campo é obrigatório'),
+    scholl_year_student: Yup.number().required('Este Campo é obrigatório'),
+    scholl_Class_student: Yup.string()
 })
 
 export function RegistrationParents() {
