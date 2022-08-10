@@ -15,8 +15,26 @@ export const Content = styled.ul`
     list-style: none;
 
     li{
+        padding-right: 1rem; 
+    }
+
+    li:nth-last-child(2), li:nth-last-child(1){
+        display: none;
+    }
+
+`
+export const ContentInferior = styled.ul`
+    display: flex;
+    align-items: center;
+    list-style: none;
+
+    li{
         padding-right: 1rem;
         
+    }
+
+    @media (max-width: 660px) {
+        display: none;
     }
 
 `

@@ -15,4 +15,8 @@ export const ContainerButton = styled.button`
         filter: brightness(0.9);
         color: black;
     }
+
+    @media (max-width: 660px) {
+        width: 100%;
+    }
 `

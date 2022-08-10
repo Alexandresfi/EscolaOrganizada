@@ -1,14 +1,16 @@
 import React from "react";
-import { ButtonHearder, Container, UlHeader } from "./styled";
+import { ButtonHearder, ButtonMobile, Container, UlHeader } from "./styled";
 import LogoImg from "../../assects/Logo.png";
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { TitleDefaults } from "../TitleDefault"
+import { MenuMobile } from "./MenuMobile";
 
 export function Header() {
     const [typeAccess, setTypeAccess] = React.useState('')
     const [series, setSeries] = React.useState(null)
     const [schoolClass, setSchoolClass] = React.useState('')
+    const [cssMobile, setCssMobile] = React.useState(false)
 
     const handleChangeAccess = (event) => {
         setTypeAccess(event.target.value)
@@ -25,9 +27,12 @@ export function Header() {
     return (
         <>
             <Container>
+
                 <Link to='/home'>
                     <img src={LogoImg} alt="Logo Escola Organizada" width='200px' />
                 </Link>
+
+                <ButtonMobile onClick={() => { setCssMobile(!cssMobile) }} menu={cssMobile} />
 
 
                 <UlHeader>
@@ -104,7 +109,11 @@ export function Header() {
                     </li>
 
                 </UlHeader>
+
+                <MenuMobile menu={cssMobile} />
+
             </Container>
+
             <TitleDefaults />
         </>
     )

@@ -9,6 +9,10 @@ export const Container = styled.section`
 
     background: white;
     color: black;
+
+    @media (max-width: 660px) {
+        width: 92%;
+    }
 `
 export const H1 = styled.h1`
     text-align: center;

@@ -6,7 +6,8 @@ import { ClassCards } from "../../ClassCards";
 export function Education_3 () {
     const infoClassCards = [
         { 
-            link: '/frist-serie',
+            // link: '/frist-serie',
+            link: '/frist-year',
             title: '1ª Série',
             classes: ['a', 'b', 'c']
         },
