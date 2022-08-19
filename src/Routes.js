@@ -15,6 +15,7 @@ import { CardNotas } from "./Components/Notas";
 import { Education_1 } from "./Components/Notas/Pages/Education_1";
 import { Education_2 } from "./Components/Notas/Pages/Education_2";
 import { Education_3 } from "./Components/Notas/Pages/Education_3";
+import { TablesNotas } from "./Components/Notas/Pages/Table";
 
 
 
@@ -63,6 +64,8 @@ export function Rotas() {
                 <Route exact path='/education-2' component={Education_2} />
 
                 <Route exact path='/education-3' component={Education_3} />
+
+                <Route exact path='/frist-year' component={TablesNotas} />
 
             </AlunoProvider>
 

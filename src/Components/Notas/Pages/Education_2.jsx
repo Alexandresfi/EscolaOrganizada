@@ -7,7 +7,8 @@ import { ClassCards } from "../../ClassCards";
 export function Education_2 () {
     const infoClassCards = [
         {   
-            link: '/fivity-year',
+            // link: '/fivity-year',
+            link: '/frist-year',
             title: '5º Ano',
             classes: ['a', 'b', 'c', 'd']
         },

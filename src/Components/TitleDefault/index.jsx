@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Content, PLocalidation } from "./styles";
+import { Container, Content, PLocalidation, ContentInferior } from "./styles";
 import LinkdinImg from "../../assects/Linkedin.png"
 import GithubImg from "../../assects/Github.png"
 import { useLocation } from "react-router-dom";
@@ -23,12 +23,9 @@ export function TitleDefaults() {
         <Container>
             <Content>
                 <li>
-                    <p>Desenvolvedor: </p>
+                    <p>Desenvolvedor: <span>Alexandre Nascimento</span> </p>
                 </li>
 
-                <li>
-                    <h3>Alexandre Nascimento</h3>
-                </li>
 
                 <li>
                     {localidation.pathname !== '/home' && (<PLocalidation>| Você está aqui:</PLocalidation>)}
@@ -45,7 +42,7 @@ export function TitleDefaults() {
                 </li>
             </Content>
 
-            <Content>
+            <ContentInferior>
                 <li>
                     {localidation.pathname === '/home' && (
                         <a href="https://www.linkedin.com/in/alexandre-nascimento-66692920a/">
@@ -64,7 +61,8 @@ export function TitleDefaults() {
 
                 </li>
 
-            </Content>
+            </ContentInferior>
+
             {localidation.pathname !== '/home' && <ButtonHearder onClick={()=> history.goBack()}> Voltar</ButtonHearder>}
             
         </Container>
