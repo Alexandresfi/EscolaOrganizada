@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     FormControl,
     InputLabel,
@@ -20,8 +20,8 @@ function Alert(props) {
 
 export function EmploymentData({ formik}) {
 
-    const [errorCPF, setErrorCPF] = React.useState(false)
-    const [open, setOpen] = React.useState(false)
+    const [errorCPF, setErrorCPF] = useState(false)
+    const [open, setOpen] = useState(false)
     const history = useHistory()
 
     const time = 1000

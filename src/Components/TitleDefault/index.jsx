@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Content, PLocalidation, ContentInferior } from "./styles";
 import LinkdinImg from "../../assects/Linkedin.png"
 import GithubImg from "../../assects/Github.png"
@@ -11,7 +11,7 @@ export function TitleDefaults() {
     const localidation = useLocation()
     const history = useHistory()
 
-    const [title, setTitle] = React.useState([])
+    const [title, setTitle] = useState([])
 
     useEffect(() => {
         setTitle([...title, localidation.pathname.split('/')[1]])

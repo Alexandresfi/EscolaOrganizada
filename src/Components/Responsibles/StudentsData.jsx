@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select, Snackbar, TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Content} from "../TeacherManagement/styles";
 import Button from "../ButtonProceed";
@@ -10,7 +10,7 @@ import { Alert } from "@material-ui/lab";
 export function StudentsData({ formik, updatePageProgress }) {
     const history = useHistory()   
 
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
 
     const time = 1000
 

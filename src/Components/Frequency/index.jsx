@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React, {useState} from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -35,7 +35,7 @@ const media = (array)=>{
 }
 
 export function TablesFrequency() {
-    const [listStudantes, setListStudantes] = React.useState([
+    const [listStudantes, setListStudantes] = useState([
         {
             id: 1,
             name: 'Alexandre Nascimento',

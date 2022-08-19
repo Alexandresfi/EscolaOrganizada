@@ -1,12 +1,12 @@
 import { TextField } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Content} from "../TeacherManagement/styles";
 import Button from "../ButtonProceed";
 import ButtonBack from "../ButtonBack";
 
 export function AddressData({ formik, updatePageProgress }) {
-    const [errorCep, setErrorCep] = React.useState(false)
+    const [errorCep, setErrorCep] = useState(false)
     const history = useHistory()
 
     const validadeCEP = (event) =>{

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormControlLabel, Switch } from "@material-ui/core";
 import { Container, H1 } from "./styles";
 import { Registration } from "./Registration";
@@ -6,7 +6,7 @@ import { ManageTeachersClass } from "./ManageTeachersClass";
 
 export function Teacher() {
 
-    const [typeAction, setTypeAction] = React.useState({
+    const [typeAction, setTypeAction] = useState({
         create: true,
         update: false,
     })
