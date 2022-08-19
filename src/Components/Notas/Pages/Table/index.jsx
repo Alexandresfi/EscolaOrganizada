@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Button,
     Dialog,
@@ -17,9 +17,9 @@ import { IconButton } from "@mui/material";
 
 export function TablesNotas() {
 
-    const [show, setShow] = React.useState(false)
+    const [show, setShow] = useState(false)
     
-    const [listStudantes, setListStudantes] = React.useState([
+    const [listStudantes, setListStudantes] = useState([
         {
             id: 1,
             name: 'Alexandre Nascimento',

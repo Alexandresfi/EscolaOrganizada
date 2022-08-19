@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { PersonData } from "./PersonData";
@@ -92,8 +92,8 @@ const validation = Yup.object().shape({
 
 
 export function Registration() {
-    const [value, setValue] = React.useState(0);
-    const [progress, setProgress] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     const formik = useFormik({
         initialValues,

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
     Button,
     Dialog,
@@ -24,8 +24,8 @@ import { UlHeader } from "../Header/styled";
 
 export function ManageTeachersClass() {
 
-    const [show, setShow] = React.useState(false)
-    const [dataSeries, setDataSeries] = React.useState({
+    const [show, setShow] = useState(false)
+    const [dataSeries, setDataSeries] = useState({
         id: null,
         teacher: '',
         subjects: '',
@@ -33,11 +33,11 @@ export function ManageTeachersClass() {
             { ano: '', turma: '' },
         ],
     })
-    const [settingData, setSettingData] = React.useState({
+    const [settingData, setSettingData] = useState({
         isCreate: false,
         isUpdate: false
     })
-    const [teacherData, setTeacherData] = React.useState([
+    const [teacherData, setTeacherData] = useState([
         {
             id: 1,
             teacher: 'Alexandre Nascimento',

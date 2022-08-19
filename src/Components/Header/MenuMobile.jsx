@@ -1,5 +1,5 @@
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core"
-import React from "react"
+import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { ButtonHearder, LiMobile, Menumobile } from "./styled"
 
@@ -7,9 +7,9 @@ import { ButtonHearder, LiMobile, Menumobile } from "./styled"
 
 export function MenuMobile({menu}) {
 
-    const [typeAccess, setTypeAccess] = React.useState('')
-    const [series, setSeries] = React.useState(null)
-    const [schoolClass, setSchoolClass] = React.useState('')
+    const [typeAccess, setTypeAccess] = useState('')
+    const [series, setSeries] = useState(null)
+    const [schoolClass, setSchoolClass] = useState('')
 
     const handleChangeAccess = (event) => {
         setTypeAccess(event.target.value)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ButtonHearder, ButtonMobile, Container, UlHeader } from "./styled";
 import LogoImg from "../../assects/Logo.png";
 import { FormControl, InputLabel, MenuItem, Select } from "@material-ui/core";
@@ -7,10 +7,10 @@ import { TitleDefaults } from "../TitleDefault"
 import { MenuMobile } from "./MenuMobile";
 
 export function Header() {
-    const [typeAccess, setTypeAccess] = React.useState('')
-    const [series, setSeries] = React.useState(null)
-    const [schoolClass, setSchoolClass] = React.useState('')
-    const [cssMobile, setCssMobile] = React.useState(false)
+    const [typeAccess, setTypeAccess] = useState('')
+    const [series, setSeries] = useState(null)
+    const [schoolClass, setSchoolClass] = useState('')
+    const [cssMobile, setCssMobile] = useState(false)
 
     const handleChangeAccess = (event) => {
         setTypeAccess(event.target.value)
