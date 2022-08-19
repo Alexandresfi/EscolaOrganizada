@@ -1,1 +1,1 @@
-<h1 align="center" >Escola Organizada (Front-end)</h1>
+<h1 align="center" >Escola Organizada (Front-end) Atualizado</h1>
