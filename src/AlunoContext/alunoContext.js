@@ -1,15 +1,19 @@
-import React, {useState, createContext} from "react";
+import React, { useState, createContext } from 'react'
 
-export const AlunoContext = createContext();
+import PropTypes from 'prop-types'
+
+export const AlunoContext = createContext()
 
 export function AlunoProvider(props) {
-    const [alunos,setAlunos] = useState([]);
-    
+  const [alunos, setAlunos] = useState([])
 
-    return(
-        <AlunoContext.Provider value={[alunos,setAlunos]}>
-            {props.children}
-        </AlunoContext.Provider>
-    )
+  return (
+    <AlunoContext.Provider value={[alunos, setAlunos]}>
+      {props.children}
+    </AlunoContext.Provider>
+  )
 }
 
+AlunoProvider.propTypes = {
+  children: PropTypes.string
+}

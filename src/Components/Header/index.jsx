@@ -1,20 +1,17 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
-
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 
-import { ButtonHearder, LiMobile, Menumobile } from './styled'
+import LogoImg from '../../assects/Logo.png'
+import { TitleDefaults } from '../TitleDefault'
+import { MenuMobile } from './MenuMobile'
+import { ButtonHearder, ButtonMobile, Container, UlHeader } from './styled'
 
-export function MenuMobile({ menu }) {
-  const [typeAccess, setTypeAccess] = useState('')
+export function Header() {
   const [series, setSeries] = useState(null)
   const [schoolClass, setSchoolClass] = useState('')
-
-  const handleChangeAccess = event => {
-    setTypeAccess(event.target.value)
-  }
+  const [cssMobile, setCssMobile] = useState(false)
 
   const handleChangeClass = event => {
     setSchoolClass(event.target.value)
@@ -23,37 +20,28 @@ export function MenuMobile({ menu }) {
   const handleChangeSeries = event => {
     setSeries(event.target.value)
   }
+
   return (
-    <Menumobile Menu={menu}>
-      <nav>
-        <ul>
-          <LiMobile>
+    <>
+      <Container>
+        <Link to="/home">
+          <img src={LogoImg} alt="Logo Escola Organizada" width="200px" />
+        </Link>
+
+        <ButtonMobile
+          onClick={() => {
+            setCssMobile(!cssMobile)
+          }}
+          menu={cssMobile}
+        />
+
+        <UlHeader>
+          <li>
             <FormControl>
-              <InputLabel className="color" style={{ color: '#fff' }}>
-                Tipo de Acesso:
-              </InputLabel>
+              <InputLabel className="color">Serie/Ano:</InputLabel>
 
               <Select
-                style={{ color: '#fff' }}
-                className="width-select color"
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={typeAccess}
-                onChange={handleChangeAccess}
-              >
-                <MenuItem value="teacher"> Professor(a) </MenuItem>
-                <MenuItem value="admin"> Secretária </MenuItem>
-                <MenuItem value="parents"> Responsáveis </MenuItem>
-              </Select>
-            </FormControl>
-          </LiMobile>
-
-          <LiMobile>
-            <FormControl>
-              <InputLabel style={{ color: '#fff' }}>Serie/Ano:</InputLabel>
-
-              <Select
-                style={{ color: '#fff' }}
+                className="width-small color"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={series}
@@ -73,14 +61,14 @@ export function MenuMobile({ menu }) {
                 <MenuItem value={12}> 3º Serie </MenuItem>
               </Select>
             </FormControl>
-          </LiMobile>
+          </li>
 
-          <LiMobile>
+          <li>
             <FormControl>
-              <InputLabel style={{ color: '#fff' }}>Turma:</InputLabel>
+              <InputLabel className="color">Turma:</InputLabel>
 
               <Select
-                style={{ color: '#fff' }}
+                className="width-small color"
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={schoolClass}
@@ -91,19 +79,19 @@ export function MenuMobile({ menu }) {
                 <MenuItem value="c"> C </MenuItem>
               </Select>
             </FormControl>
-          </LiMobile>
+          </li>
 
-          <LiMobile>
+          <li>
             <ButtonHearder>
               <Link to="/">Sair</Link>
             </ButtonHearder>
-          </LiMobile>
-        </ul>
-      </nav>
-    </Menumobile>
-  )
-}
+          </li>
+        </UlHeader>
 
-MenuMobile.propTypes = {
-  menu: PropTypes.bool
+        <MenuMobile menu={cssMobile} />
+      </Container>
+
+      <TitleDefaults />
+    </>
+  )
 }
