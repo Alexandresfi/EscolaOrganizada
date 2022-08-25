@@ -7,29 +7,83 @@ import {
   DialogContent,
   DialogTitle,
   Fab,
+  FormControl,
+  InputLabel,
+  MenuItem,
   Paper,
+  Select,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Tooltip
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
 
 import { apiEscola } from '../../../../services/api'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+
+import { Content } from '../../styles'
+
+const initialValues = {
+  fullname: '',
+  surname: '',
+  email: ' ',
+  telephone: '',
+  zip_code: '',
+  street: '',
+  house_number: '',
+  complement: '',
+  city: '',
+  district: '',
+  state: '',
+  titles: ''
+}
+
+const validation = Yup.object().shape({
+  fullname: Yup.string(),
+  surname: Yup.string(),
+  email: Yup.string().email(),
+  telephone: Yup.string(),
+  zip_code: Yup.number().min(
+    8,
+    'o cep possui oito dígitos, apenas números sem pontos e -'
+  ),
+  street: Yup.string(),
+  house_number: Yup.number(),
+  complement: Yup.string(),
+  city: Yup.string(),
+  district: Yup.string(),
+  state: Yup.string(),
+  titles: Yup.string()
+})
 
 export function UpdateData() {
+  const [reload, setReload] = useState(false)
   const [show, setShow] = useState(false)
-  //   const [teacherInfo, setTeacherInfo] = useState({
-  //     id: null,
-  //     fullname: '',
-  //     school_class: [],
-  //     school_subjects: [{ ano: '', turma: '' }]
-  //   })
+  const [errorCep, setErrorCep] = useState(false)
+  const [teacherInfo, setTeacherInfo] = useState({
+    id: null,
+    fullname: '',
+    surname: '',
+    email: '',
+    telephone: '',
+    graduation_titles: '',
+    zip_code: '',
+    house_number: '',
+    complement: ''
+  })
 
   const [teachersData, setTeachersData] = useState([{}])
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: validation
+  })
 
   const loadTeacherData = () => {
     const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
@@ -39,6 +93,48 @@ export function UpdateData() {
       return true
     } else {
       return false
+    }
+  }
+
+  const CompleteFields = data => {
+    formik.setFieldValue('fullname', data.fullname)
+    formik.setFieldValue('surname', data.surname)
+    formik.setFieldValue('email', data.email)
+    formik.setFieldValue('telephone', data.telephone)
+    formik.setFieldValue('zip_code', data.address.zip_code)
+    formik.setFieldValue('house_number', data.address.house_number)
+    formik.setFieldValue('complement', data.address.complement)
+    formik.setFieldValue('title', data.graduation_titles)
+  }
+
+  const updateTechaerData = async id => {
+    try {
+      const { status } = await toast.promise(
+        apiEscola.put(
+          `teacher/${id}`,
+          {
+            fullname: formik.values.fullname,
+            surname: formik.values.surname,
+            email: formik.values.email,
+            telephone: formik.values.telephone,
+            graduation_titles: formik.values.titles
+          },
+          {
+            validateStatus: () => true
+          }
+        ),
+        { pending: 'Atualizando dados do Usuário 📖' }
+      )
+
+      if (status === 200) {
+        toast.success('Dados atualizados com sucesso 📗')
+        await localStorage.removeItem('escolaOrganizada:teacherData')
+        setReload(t => !t)
+      } else {
+        throw new Error()
+      }
+    } catch (error) {
+      toast.error('Falha no sistema! Tente novamente 🤷‍♂️')
     }
   }
 
@@ -55,6 +151,7 @@ export function UpdateData() {
         if (status === 200) {
           toast.success('Informações carregadas com sucesso 🔎')
           setTeachersData(data)
+
           await localStorage.setItem(
             'escolaOrganizada:teacherData',
             JSON.stringify(data)
@@ -68,13 +165,37 @@ export function UpdateData() {
     }
   }
 
+  const validadeCEP = event => {
+    if (event.target.value.length !== 8) {
+      setErrorCep(true)
+    } else {
+      setErrorCep(false)
+      cepApi(event.target.value)
+    }
+  }
+
+  const cepApi = cep => {
+    fetch(`https://ws.apicep.com/cep/${cep}.json`)
+      .then(data => data.json())
+      .then(data => {
+        formik.setFieldValue('street', data.address)
+        formik.setFieldValue('city', data.city)
+        formik.setFieldValue('district', data.district)
+        formik.setFieldValue('state', data.state)
+      })
+  }
+
   useEffect(() => {
     getTeachersData()
-  }, [])
+  }, [reload])
 
   const handleClose = () => {
     setShow(false)
-    // console.log(dataSeries)
+  }
+
+  const findTeacher = id => {
+    setTeacherInfo(teachersData.find(sala => sala.id === id))
+    CompleteFields(teachersData.find(sala => sala.id === id))
   }
 
   // const createSerie = () => {}
@@ -104,6 +225,7 @@ export function UpdateData() {
                       aria-label="edit"
                       onClick={() => {
                         setShow(true)
+                        findTeacher(teacher.id)
                       }}
                     >
                       <EditIcon fontSize="small" />
@@ -129,9 +251,152 @@ export function UpdateData() {
         </DialogTitle>
 
         <DialogContent style={{ background: '#666666' }}>
+          <Content>
+            <TextField
+              label="Nome completo:"
+              id="fullname"
+              variant="outlined"
+              fullWidth
+              autoComplete={false}
+              {...formik.getFieldProps('fullname')}
+            />
+
+            {formik.errors.fullname && formik.touched.fullname ? (
+              <span>{formik.errors.fullname}</span>
+            ) : null}
+          </Content>
+
+          <Content>
+            <TextField
+              label="Nome Social:"
+              id="surname"
+              variant="outlined"
+              autoComplete={false}
+              fullWidth
+              {...formik.getFieldProps('surname')}
+            />
+
+            {formik.errors.surname && formik.touched.surname ? (
+              <span>{formik.errors.surname}</span>
+            ) : null}
+          </Content>
+
+          <Content>
+            <TextField
+              label="E-mail:"
+              id="email"
+              variant="outlined"
+              type="email"
+              autoComplete={false}
+              fullWidth
+              {...formik.getFieldProps('email')}
+            />
+
+            {formik.errors.email && formik.touched.email ? (
+              <span>{formik.errors.email}</span>
+            ) : null}
+          </Content>
+
+          <Content>
+            <TextField
+              label="Celular"
+              id="telephone"
+              variant="outlined"
+              type="tel"
+              autoComplete={false}
+              fullWidth
+              {...formik.getFieldProps('telephone')}
+            />
+
+            {formik.errors.telephone && formik.touched.telephone ? (
+              <span>{formik.errors.telephone}</span>
+            ) : null}
+          </Content>
+
+          <Content>
+            <FormControl
+              variant="outlined"
+              style={{ width: '100%', color: '#fff' }}
+            >
+              <InputLabel htmlFor="gener">Títulos:</InputLabel>
+              <Select
+                label="Títulos"
+                labelId="titles"
+                id="titles"
+                autoComplete={false}
+                {...formik.getFieldProps('titles')}
+              >
+                <MenuItem value="licensed">Licenciado(a)</MenuItem>
+                <MenuItem value="specialist">Especialista</MenuItem>
+                <MenuItem value="mestre">Mestre</MenuItem>
+                <MenuItem value="doctor">Doutor(a)</MenuItem>
+              </Select>
+            </FormControl>
+            {formik.errors.titles && formik.touched.titles ? (
+              <span>{formik.errors.titles}</span>
+            ) : null}
+          </Content>
+
+          <Content>
+            <Content>
+              <TextField
+                label="CEP:"
+                id="zip_code"
+                variant="outlined"
+                type="text"
+                value={formik.values.zip_code}
+                fullWidth
+                onChange={event => {
+                  validadeCEP(event)
+                  formik.setFieldValue('zip_code', event.target.value)
+                }}
+              />
+
+              {formik.errors.zip_code && formik.touched.zip_code ? (
+                <span>{formik.errors.zip_code}</span>
+              ) : null}
+              {errorCep && <span>CEp inválido</span>}
+            </Content>
+
+            <TextField
+              label="Complemento:"
+              id="complement"
+              variant="outlined"
+              type="text"
+              fullWidth
+              {...formik.getFieldProps('complement')}
+            />
+
+            {formik.errors.complement && formik.touched.complement ? (
+              <span>{formik.errors.complement}</span>
+            ) : null}
+
+            <Content>
+              <TextField
+                label="Número:"
+                id="house_number"
+                variant="outlined"
+                type="text"
+                fullWidth
+                {...formik.getFieldProps('house_number')}
+              />
+
+              {formik.errors.house_number && formik.touched.house_number ? (
+                <span>{formik.errors.house_number}</span>
+              ) : null}
+            </Content>
+          </Content>
+
           <Button onClick={handleClose}>Cancelar</Button>
 
-          <Button onClick={handleClose}>Salvar</Button>
+          <Button
+            onClick={() => {
+              handleClose()
+              updateTechaerData(teacherInfo.id)
+            }}
+          >
+            Salvar
+          </Button>
         </DialogContent>
       </Dialog>
     </>
