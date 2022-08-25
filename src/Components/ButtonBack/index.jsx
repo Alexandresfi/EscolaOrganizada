@@ -1,8 +1,15 @@
-import React from "react"
-import { ContainerButton } from "./styles"
+import React from 'react'
 
-function ButtonBack ({ children, ...props }) {
-    return <ContainerButton {...props}>{children}</ContainerButton>
+import PropTypes from 'prop-types'
+
+import { ContainerButton } from './styles'
+
+function ButtonBack({ children, ...props }) {
+  return <ContainerButton {...props}>{children}</ContainerButton>
 }
 
 export default ButtonBack
+
+ButtonBack.propTypes = {
+  children: PropTypes.string
+}

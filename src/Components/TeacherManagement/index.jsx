@@ -1,44 +1,38 @@
-import React, { useState } from "react";
-import { FormControlLabel, Switch } from "@material-ui/core";
-import { Container, H1 } from "./styles";
-import { Registration } from "./Registration";
-import { ManageTeachersClass } from "./ManageTeachersClass";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-export function Teacher() {
+import AddTeacher from '../../assects/addTeacher.png'
+import UpdateTeacher from '../../assects/updateTeacher.png'
 
-    const [typeAction, setTypeAction] = useState({
-        create: true,
-        update: false,
-    })
+import { List, Container } from '../Notas/styles'
 
-    return (
-        <Container>
-            {typeAction.create && <H1>Cadastro de Professores</H1>}
-            {typeAction.update && <H1>Remover turma de professor ou o professor</H1>}
-            <div>
-                <FormControlLabel
-                    control={<Switch />}
-                    label='Cadastrar professor'
-                    checked={typeAction.create}
-                    onClick={()=> setTypeAction({
-                        create: true,
-                        update: false,
-                    })}
-                />
-
-                <FormControlLabel
-                    control={<Switch />}
-                    label='Remover'
-                    checked={typeAction.update}
-                    onClick={()=> setTypeAction({
-                        create: false,
-                        update: true,
-                    })}
-                />
-            </div>
-            {typeAction.create && <Registration/> }
-            {typeAction.update && <ManageTeachersClass/>}
-            
-        </Container>
-    )
+export function ContainerTeachers() {
+  const infoCards = [
+    {
+      link: '/teacher/create',
+      title: 'Criar ou Remover',
+      image: AddTeacher
+    },
+    {
+      link: '/teacher/update',
+      title: 'Atualizar',
+      image: UpdateTeacher
+    }
+  ]
+  return (
+    <nav>
+      <List>
+        {infoCards?.map((infoCard, index) => (
+          <li key={index}>
+            <Link to={infoCard.link}>
+              <Container>
+                <img src={infoCard.image} alt="imagem" />
+                <p>{infoCard.title}</p>
+              </Container>
+            </Link>
+          </li>
+        ))}
+      </List>
+    </nav>
+  )
 }

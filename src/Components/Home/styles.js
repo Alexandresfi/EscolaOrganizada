@@ -1,17 +1,16 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const List = styled.ul`
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    
-    margin: 3.5rem auto 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 
-    list-style: none;
-    transition: all linear 0.5s;
+  margin: 3.5rem auto 0 auto;
 
-    li{
-        margin: 2rem;
-    }
+  list-style: none;
+  transition: all linear 0.5s;
 
+  li {
+    margin: 2rem;
+  }
 `
