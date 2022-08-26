@@ -126,6 +126,16 @@ export function UpdateData() {
         { pending: 'Atualizando dados do Usuário 📖' }
       )
 
+      await apiEscola.put(`address/${teacherInfo.cpf}`, {
+        zip_code: formik.values.zip_code,
+        city: formik.values.city,
+        complement: formik.values.complement,
+        district: formik.values.district,
+        house_number: formik.values.house_number,
+        state: formik.values.state,
+        street: formik.values.street
+      })
+
       if (status === 200) {
         toast.success('Dados atualizados com sucesso 📗')
         await localStorage.removeItem('escolaOrganizada:teacherData')

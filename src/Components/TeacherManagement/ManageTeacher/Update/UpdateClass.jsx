@@ -28,9 +28,9 @@ import { apiEscola } from '../../../../services/api'
 
 export function UpdateClass() {
   const [show, setShow] = useState(false)
+  const [reload, setReload] = useState(false)
   const [dataSeries, setDataSeries] = useState({
     id: null,
-    fullname: '',
     school_class: [],
     school_subjects: [{ ano: '', turma: '' }]
   })
@@ -38,22 +38,22 @@ export function UpdateClass() {
     isCreate: false,
     isUpdate: false
   })
-  const [teacherData, setTeacherData] = useState([{}])
+  const [teachersData, setTeachersData] = useState([{}])
 
-  const loadTeacherData = () => {
+  const loadTeachersData = () => {
     const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
 
     if (existTeacher) {
-      setTeacherData(JSON.parse(existTeacher))
+      setTeachersData(JSON.parse(existTeacher))
       return true
     } else {
       return false
     }
   }
 
-  const getTeacherData = async () => {
+  const getTeachersData = async () => {
     try {
-      if (!loadTeacherData()) {
+      if (!loadTeachersData()) {
         const { status, data } = await toast.promise(
           apiEscola.get('teachers'),
           {
@@ -63,7 +63,7 @@ export function UpdateClass() {
 
         if (status === 200) {
           toast.success('Informações carregadas com sucesso 🔎')
-          setTeacherData(data)
+          setTeachersData(data)
           await localStorage.setItem(
             'escolaOrganizada:teacherData',
             JSON.stringify(data)
@@ -77,9 +77,37 @@ export function UpdateClass() {
     }
   }
 
+  const updateSerie = async id => {
+    try {
+      const { status } = await toast.promise(
+        apiEscola.put(
+          `teacher/${id}`,
+          {
+            school_class: dataSeries.school_class,
+            school_subjects: dataSeries.school_subjects
+          },
+          {
+            validateStatus: () => true
+          }
+        ),
+        { pending: 'Atualizando dados do Usuário 📖' }
+      )
+
+      if (status === 200) {
+        toast.success('Dados atualizados com sucesso 📗')
+        await localStorage.removeItem('escolaOrganizada:teacherData')
+        setReload(t => !t)
+      } else {
+        throw new Error()
+      }
+    } catch (error) {
+      toast.error('Falha no sistema! Tente novamente 🤷‍♂️')
+    }
+  }
+
   useEffect(() => {
-    getTeacherData()
-  }, [])
+    getTeachersData()
+  }, [reload])
 
   const handleClose = () => {
     setShow(false)
@@ -87,15 +115,18 @@ export function UpdateClass() {
   }
 
   const findSeries = id => {
-    setDataSeries(teacherData.find(sala => sala.id === id))
+    setDataSeries(teachersData.find(sala => sala.id === id))
   }
 
   const deleteSerie = turma => {
     const removedClass = dataSeries?.school_subjects?.filter(
       remove => remove !== turma
     )
+    setDataSeries({ ...dataSeries, school_subjects: removedClass })
+  }
 
-    setDataSeries({ ...dataSeries, school_class: removedClass })
+  const updateSerieData = turma => {
+    console.log(turma)
   }
 
   // const createSerie = () => {}
@@ -117,7 +148,7 @@ export function UpdateClass() {
           </TableHead>
 
           <TableBody>
-            {teacherData?.map(teacher => (
+            {teachersData?.map(teacher => (
               <TableRow key={teacher.id}>
                 <TableCell align="center">{teacher.surname}</TableCell>
 
@@ -208,44 +239,35 @@ export function UpdateClass() {
                         className="width-small color"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={
-                          serie?.split(' ')[0] + ' ' + serie?.split(' ')[1]
-                        }
-                        // onChange={handleChangeSeries}
+                        value={serie}
+                        onChange={() => {
+                          updateSerieData(serie)
+                        }}
                       >
-                        <MenuItem value="1º Ano"> 1º Ano </MenuItem>
-                        <MenuItem value="2º Ano"> 2º Ano </MenuItem>
-                        <MenuItem value="3º Ano"> 3º Ano </MenuItem>
-                        <MenuItem value="4º Ano"> 4º Ano </MenuItem>
-                        <MenuItem value="5º Ano"> 5º Ano </MenuItem>
-                        <MenuItem value="6º Ano"> 6º Ano </MenuItem>
-                        <MenuItem value="7º Ano"> 7º Ano </MenuItem>
-                        <MenuItem value="8º Ano"> 8º Ano </MenuItem>
-                        <MenuItem value="9º Ano"> 9º Ano </MenuItem>
-                        <MenuItem value="1ª Serie"> 1ª Serie </MenuItem>
-                        <MenuItem value="2ª Serie"> 2º Serie </MenuItem>
-                        <MenuItem value="3ª Serie"> 3º Serie </MenuItem>
+                        <MenuItem value="1º Ano A"> 1º Ano A</MenuItem>
+                        <MenuItem value="1º Ano B"> 1º Ano B</MenuItem>
+                        <MenuItem value="2º Ano A"> 2º Ano A</MenuItem>
+                        <MenuItem value="2º Ano B"> 2º Ano B</MenuItem>
+                        <MenuItem value="3º Ano A"> 3º Ano A</MenuItem>
+                        <MenuItem value="3º Ano B"> 3º Ano B</MenuItem>
+                        <MenuItem value="4º Ano A"> 4º Ano A</MenuItem>
+                        <MenuItem value="4º Ano B"> 4º Ano B</MenuItem>
+                        <MenuItem value="5º Ano A"> 5º Ano A</MenuItem>
+                        <MenuItem value="6º Ano A"> 6º Ano A</MenuItem>
+                        <MenuItem value="7º Ano A"> 7º Ano A</MenuItem>
+                        <MenuItem value="8º Ano A"> 8º Ano A</MenuItem>
+                        <MenuItem value="8º Ano B"> 8º Ano B</MenuItem>
+                        <MenuItem value="8º Ano C"> 8º Ano C</MenuItem>
+                        <MenuItem value="9º Ano A"> 9º Ano A</MenuItem>
+                        <MenuItem value="9º Ano B"> 9º Ano B</MenuItem>
+                        <MenuItem value="1ª Serie A"> 1ª Serie A</MenuItem>
+                        <MenuItem value="2ª Serie A"> 2º Serie A</MenuItem>
+                        <MenuItem value="3ª Serie A"> 3º Serie A</MenuItem>
+                        <MenuItem value="3ª Serie B"> 3º Serie B</MenuItem>
                       </Select>
                     </FormControl>
                   </li>
 
-                  <li>
-                    <FormControl>
-                      <InputLabel className="color">Turma:</InputLabel>
-
-                      <Select
-                        className="width-small color"
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        value={serie?.split(' ')[2]}
-                        // onChange={handleChangeClass}
-                      >
-                        <MenuItem value="A"> A </MenuItem>
-                        <MenuItem value="B"> B </MenuItem>
-                        <MenuItem value="C"> C </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </li>
                   {settingData.isUpdate && (
                     <Button
                       color="secondary"
@@ -299,7 +321,7 @@ export function UpdateClass() {
                       className="width-small color"
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      // onChange={handleChangeClass}
+                      // onChange={e => {}}
                     >
                       <MenuItem value="A"> A </MenuItem>
                       <MenuItem value="B"> B </MenuItem>
@@ -319,7 +341,14 @@ export function UpdateClass() {
             Cancelar
           </Button>
 
-          <Button onClick={handleClose}>Salvar</Button>
+          <Button
+            onClick={() => {
+              updateSerie(dataSeries.id)
+              handleClose()
+            }}
+          >
+            Salvar
+          </Button>
         </DialogContent>
       </Dialog>
     </>
