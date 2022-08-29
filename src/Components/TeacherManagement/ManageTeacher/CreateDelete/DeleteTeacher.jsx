@@ -99,8 +99,8 @@ export function DeleteTeacher() {
           </TableHead>
 
           <TableBody>
-            {teacherData?.map(teacher => (
-              <TableRow key={teacher.id}>
+            {teacherData?.map((teacher, index) => (
+              <TableRow key={index}>
                 <TableCell align="center">{teacher.fullname}</TableCell>
 
                 <TableCell align="center">
@@ -114,7 +114,7 @@ export function DeleteTeacher() {
                 <TableCell align="center">
                   {teacher.school_class?.map((subject, index) => (
                     <ul key={index}>
-                      <li>{subject}</li>
+                      <li style={{ textTransform: 'capitalize' }}>{subject}</li>
                     </ul>
                   ))}
                 </TableCell>

@@ -207,7 +207,7 @@ export function UpdateClass() {
   }
 
   const POSTCreateSeries = async id => {
-    await setDataSeries({
+    setDataSeries({
       ...dataSeries,
       school_class: [...dataSeries.school_class, addSeries.school_class],
       school_subjects: [
@@ -221,14 +221,17 @@ export function UpdateClass() {
         apiEscola.put(
           `teacher/${id}`,
           {
-            school_class: dataSeries.school_class,
-            school_subjects: dataSeries.school_subjects
+            school_class: [...dataSeries.school_class, addSeries.school_class],
+            school_subjects: [
+              ...dataSeries.school_subjects,
+              addSeries.school_subjects
+            ]
           },
           {
             validateStatus: () => true
           }
         ),
-        { pending: 'Criando turma 📑' }
+        { pending: 'Criando Turma 📑' }
       )
 
       if (status === 200) {
@@ -241,6 +244,8 @@ export function UpdateClass() {
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente 🤷‍♂️')
     }
+
+    console.log(dataSeries)
   }
 
   return (
@@ -267,7 +272,7 @@ export function UpdateClass() {
                 <TableCell align="center">
                   {teacher.school_subjects?.map((serie, index) => (
                     <ul key={index}>
-                      <li>{serie}</li>
+                      <li style={{ textTransform: 'capitalize' }}>{serie}</li>
                     </ul>
                   ))}
                 </TableCell>
@@ -500,6 +505,7 @@ export function UpdateClass() {
                     label="Disciplina"
                     type="text"
                     value={addSeries.school_subjects}
+                    className="color"
                     onChange={e =>
                       setAddSeries({
                         ...addSeries,
@@ -545,6 +551,10 @@ export function UpdateClass() {
               <Button
                 onClick={() => {
                   POSTCreateSeries(dataSeries.id)
+                  setAddSeries({
+                    school_class: ' ',
+                    school_subjects: ' '
+                  })
                   handleClose()
                 }}
                 disabled={

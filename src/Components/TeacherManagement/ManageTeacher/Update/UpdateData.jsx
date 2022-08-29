@@ -268,6 +268,7 @@ export function UpdateData() {
               variant="outlined"
               fullWidth
               autoComplete={false}
+              className="color"
               {...formik.getFieldProps('fullname')}
             />
 
@@ -283,6 +284,7 @@ export function UpdateData() {
               variant="outlined"
               autoComplete={false}
               fullWidth
+              className="color"
               {...formik.getFieldProps('surname')}
             />
 
@@ -299,6 +301,7 @@ export function UpdateData() {
               type="email"
               autoComplete={false}
               fullWidth
+              className="color"
               {...formik.getFieldProps('email')}
             />
 
@@ -315,6 +318,7 @@ export function UpdateData() {
               type="tel"
               autoComplete={false}
               fullWidth
+              className="color"
               {...formik.getFieldProps('telephone')}
             />
 
@@ -334,6 +338,7 @@ export function UpdateData() {
                 labelId="titles"
                 id="titles"
                 autoComplete={false}
+                className="color"
                 {...formik.getFieldProps('titles')}
               >
                 <MenuItem value="licensed">Licenciado(a)</MenuItem>
@@ -356,6 +361,7 @@ export function UpdateData() {
                 type="text"
                 value={formik.values.zip_code}
                 fullWidth
+                className="color"
                 onChange={event => {
                   validadeCEP(event)
                   formik.setFieldValue('zip_code', event.target.value)
@@ -374,6 +380,7 @@ export function UpdateData() {
               variant="outlined"
               type="text"
               fullWidth
+              className="color"
               {...formik.getFieldProps('complement')}
             />
 
@@ -388,6 +395,7 @@ export function UpdateData() {
                 variant="outlined"
                 type="text"
                 fullWidth
+                className="color"
                 {...formik.getFieldProps('house_number')}
               />
 
