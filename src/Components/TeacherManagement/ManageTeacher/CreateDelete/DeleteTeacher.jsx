@@ -104,17 +104,17 @@ export function DeleteTeacher() {
                 <TableCell align="center">{teacher.fullname}</TableCell>
 
                 <TableCell align="center">
-                  {teacher.school_class?.map((subject, index) => (
+                  {teacher.school_subjects?.map((serie, index) => (
                     <ul key={index}>
-                      <li>{subject}</li>
+                      <li>{serie}</li>
                     </ul>
                   ))}
                 </TableCell>
 
                 <TableCell align="center">
-                  {teacher.school_subjects?.map((serie, index) => (
+                  {teacher.school_class?.map((subject, index) => (
                     <ul key={index}>
-                      <li>{serie}</li>
+                      <li>{subject}</li>
                     </ul>
                   ))}
                 </TableCell>

@@ -18,13 +18,14 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Tooltip
 } from '@material-ui/core'
 import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 
-import { UlHeader } from '../../../Header/styled'
 import { apiEscola } from '../../../../services/api'
+import { Ul } from '../../styles'
 
 export function UpdateClass() {
   const [show, setShow] = useState(false)
@@ -32,13 +33,18 @@ export function UpdateClass() {
   const [dataSeries, setDataSeries] = useState({
     id: null,
     school_class: [],
-    school_subjects: [{ ano: '', turma: '' }]
+    school_subjects: []
   })
   const [settingData, setSettingData] = useState({
     isCreate: false,
     isUpdate: false
   })
   const [teachersData, setTeachersData] = useState([{}])
+  const [addSeries, setAddSeries] = useState({
+    school_class: ' ',
+    school_subjects: ' '
+  })
+  // conexão com banco de dados
 
   const loadTeachersData = () => {
     const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
@@ -77,7 +83,7 @@ export function UpdateClass() {
     }
   }
 
-  const updateSerie = async id => {
+  const PUTSerie = async id => {
     try {
       const { status } = await toast.promise(
         apiEscola.put(
@@ -109,6 +115,8 @@ export function UpdateClass() {
     getTeachersData()
   }, [reload])
 
+  // final da conexão
+
   const handleClose = () => {
     setShow(false)
     setSettingData({ ...settingData, isCreate: false, isUpdate: false })
@@ -118,18 +126,122 @@ export function UpdateClass() {
     setDataSeries(teachersData.find(sala => sala.id === id))
   }
 
+  // altualiza e deleta turmas
+
   const deleteSerie = turma => {
-    const removedClass = dataSeries?.school_subjects?.filter(
+    const removedClass = dataSeries?.school_class?.filter(
       remove => remove !== turma
     )
-    setDataSeries({ ...dataSeries, school_subjects: removedClass })
+    setDataSeries({ ...dataSeries, school_class: removedClass })
   }
 
-  const updateSerieData = turma => {
-    console.log(turma)
+  const updateClassDataFistPart = (turma, newturma) => {
+    const index = dataSeries.school_class.findIndex(item => item === turma)
+
+    dataSeries.school_class[index] = newturma + ' ' + turma.split(' ')[2]
+
+    setDataSeries({
+      ...dataSeries,
+      school_class: dataSeries.school_class
+    })
   }
 
-  // const createSerie = () => {}
+  const updateClassDataSecondPart = (turma, newturma) => {
+    const index = dataSeries.school_class.findIndex(item => item === turma)
+
+    dataSeries.school_class[index] =
+      turma.split(' ')[0] + ' ' + turma.split(' ')[1] + ' ' + newturma
+
+    setDataSeries({
+      ...dataSeries,
+      school_class: dataSeries.school_class
+    })
+  }
+
+  // atualiza e deleta disciplinas
+  const deleteSubject = subject => {
+    const removedSbuject = dataSeries.school_subjects?.filter(
+      remove => remove !== subject
+    )
+
+    setDataSeries({ ...dataSeries, school_subjects: removedSbuject })
+  }
+
+  const updateSubject = (subject, newSbuject) => {
+    const index = dataSeries.school_subjects.findIndex(item => item === subject)
+
+    dataSeries.school_subjects[index] = newSbuject
+
+    setDataSeries({
+      ...dataSeries,
+      school_subjects: dataSeries.school_subjects
+    })
+  }
+
+  // criação de turmas e disciplicas
+  const handleChangeClassFristPart = serie => {
+    if (addSeries.school_class === ' ') {
+      setAddSeries({ ...addSeries, school_class: serie })
+    } else {
+      addSeries.school_class = serie
+      setAddSeries({ ...addSeries, school_class: serie })
+    }
+  }
+
+  const handleChangeClassSecondPart = (serie, newSerie) => {
+    if (addSeries.school_class === ' ') {
+      setAddSeries({ ...addSeries, school_class: serie })
+    } else if (addSeries.school_class.split(' ')[2]) {
+      const serieEdit =
+        addSeries.school_class.split(' ')[0] +
+        ' ' +
+        addSeries.school_class.split(' ')[1] +
+        ' ' +
+        serie
+
+      setAddSeries({ ...addSeries, school_class: serieEdit })
+    } else {
+      const serieEnd = newSerie + ' ' + serie
+      setAddSeries({ ...addSeries, school_class: serieEnd })
+    }
+  }
+
+  const POSTCreateSeries = async id => {
+    await setDataSeries({
+      ...dataSeries,
+      school_class: [...dataSeries.school_class, addSeries.school_class],
+      school_subjects: [
+        ...dataSeries.school_subjects,
+        addSeries.school_subjects
+      ]
+    })
+
+    try {
+      const { status } = await toast.promise(
+        apiEscola.put(
+          `teacher/${id}`,
+          {
+            school_class: dataSeries.school_class,
+            school_subjects: dataSeries.school_subjects
+          },
+          {
+            validateStatus: () => true
+          }
+        ),
+        { pending: 'Criando turma 📑' }
+      )
+
+      if (status === 200) {
+        toast.success('Turma Criada com sucesso 📚')
+        await localStorage.removeItem('escolaOrganizada:teacherData')
+        setReload(t => !t)
+      } else {
+        throw new Error()
+      }
+    } catch (error) {
+      toast.error('Falha no sistema! Tente novamente 🤷‍♂️')
+    }
+  }
 
   return (
     <>
@@ -153,17 +265,17 @@ export function UpdateClass() {
                 <TableCell align="center">{teacher.surname}</TableCell>
 
                 <TableCell align="center">
-                  {teacher.school_class?.map((subject, index) => (
+                  {teacher.school_subjects?.map((serie, index) => (
                     <ul key={index}>
-                      <li>{subject}</li>
+                      <li>{serie}</li>
                     </ul>
                   ))}
                 </TableCell>
 
                 <TableCell align="center">
-                  {teacher.school_subjects?.map((serie, index) => (
+                  {teacher.school_class?.map((subject, index) => (
                     <ul key={index}>
-                      <li>{serie}</li>
+                      <li>{subject}</li>
                     </ul>
                   ))}
                 </TableCell>
@@ -177,6 +289,7 @@ export function UpdateClass() {
                       onClick={() => {
                         setShow(true)
                         setSettingData({ ...settingData, isCreate: true })
+                        findSeries(teacher.id)
                       }}
                     >
                       <AddIcon fontSize="small" />
@@ -229,41 +342,55 @@ export function UpdateClass() {
         <DialogContent style={{ background: '#666666' }}>
           {settingData.isUpdate && (
             <>
-              {dataSeries.school_subjects?.map((serie, index) => (
-                <UlHeader key={index}>
+              {dataSeries.school_class?.map((serie, index) => (
+                <Ul key={index}>
                   <li>
                     <FormControl>
-                      <InputLabel className="color">Serie/Ano:</InputLabel>
+                      <InputLabel>Serie/Ano:</InputLabel>
 
                       <Select
                         className="width-small color"
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={serie}
-                        onChange={() => {
-                          updateSerieData(serie)
+                        value={
+                          serie?.split(' ')[0] + ' ' + serie?.split(' ')[1]
+                        }
+                        onChange={e => {
+                          updateClassDataFistPart(serie, e.target.value)
                         }}
                       >
-                        <MenuItem value="1º Ano A"> 1º Ano A</MenuItem>
-                        <MenuItem value="1º Ano B"> 1º Ano B</MenuItem>
-                        <MenuItem value="2º Ano A"> 2º Ano A</MenuItem>
-                        <MenuItem value="2º Ano B"> 2º Ano B</MenuItem>
-                        <MenuItem value="3º Ano A"> 3º Ano A</MenuItem>
-                        <MenuItem value="3º Ano B"> 3º Ano B</MenuItem>
-                        <MenuItem value="4º Ano A"> 4º Ano A</MenuItem>
-                        <MenuItem value="4º Ano B"> 4º Ano B</MenuItem>
-                        <MenuItem value="5º Ano A"> 5º Ano A</MenuItem>
-                        <MenuItem value="6º Ano A"> 6º Ano A</MenuItem>
-                        <MenuItem value="7º Ano A"> 7º Ano A</MenuItem>
-                        <MenuItem value="8º Ano A"> 8º Ano A</MenuItem>
-                        <MenuItem value="8º Ano B"> 8º Ano B</MenuItem>
-                        <MenuItem value="8º Ano C"> 8º Ano C</MenuItem>
-                        <MenuItem value="9º Ano A"> 9º Ano A</MenuItem>
-                        <MenuItem value="9º Ano B"> 9º Ano B</MenuItem>
-                        <MenuItem value="1ª Serie A"> 1ª Serie A</MenuItem>
-                        <MenuItem value="2ª Serie A"> 2º Serie A</MenuItem>
-                        <MenuItem value="3ª Serie A"> 3º Serie A</MenuItem>
-                        <MenuItem value="3ª Serie B"> 3º Serie B</MenuItem>
+                        <MenuItem value="1º Ano"> 1º Ano </MenuItem>
+                        <MenuItem value="2º Ano"> 2º Ano </MenuItem>
+                        <MenuItem value="3º Ano"> 3º Ano </MenuItem>
+                        <MenuItem value="4º Ano"> 4º Ano </MenuItem>
+                        <MenuItem value="5º Ano"> 5º Ano </MenuItem>
+                        <MenuItem value="6º Ano"> 6º Ano </MenuItem>
+                        <MenuItem value="7º Ano"> 7º Ano </MenuItem>
+                        <MenuItem value="8º Ano"> 8º Ano </MenuItem>
+                        <MenuItem value="9º Ano"> 9º Ano </MenuItem>
+                        <MenuItem value="1ª Serie"> 1ª Serie </MenuItem>
+                        <MenuItem value="2ª Serie"> 2º Serie </MenuItem>
+                        <MenuItem value="3ª Serie"> 3º Serie </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </li>
+
+                  <li>
+                    <FormControl>
+                      <InputLabel>Turma:</InputLabel>
+
+                      <Select
+                        className="width-small"
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        value={serie?.split(' ')[2]}
+                        onChange={e => {
+                          updateClassDataSecondPart(serie, e.target.value)
+                        }}
+                      >
+                        <MenuItem value="A"> A </MenuItem>
+                        <MenuItem value="B"> B </MenuItem>
+                        <MenuItem value="C"> C </MenuItem>
                       </Select>
                     </FormControl>
                   </li>
@@ -276,79 +403,161 @@ export function UpdateClass() {
                       }}
                     >
                       {' '}
-                      Remover turma{' '}
+                      Remover classe{' '}
                     </Button>
                   )}
-                </UlHeader>
+                </Ul>
+              ))}
+
+              {dataSeries.school_subjects?.map((subject, index) => (
+                <Ul key={index}>
+                  <TextField
+                    label="Disciplina"
+                    type="text"
+                    value={subject}
+                    onChange={e => {
+                      updateSubject(subject, e.target.value)
+                    }}
+                  />
+
+                  {settingData.isUpdate && (
+                    <Button
+                      color="secondary"
+                      onClick={() => {
+                        deleteSubject(subject)
+                      }}
+                    >
+                      {' '}
+                      Remover Disciplina{' '}
+                    </Button>
+                  )}
+                </Ul>
               ))}
             </>
           )}
 
           {settingData.isCreate && (
             <>
-              <UlHeader>
+              <Ul>
                 <li>
                   <FormControl>
-                    <InputLabel className="color">Serie/Ano:</InputLabel>
+                    <InputLabel>Serie/Ano:</InputLabel>
 
                     <Select
-                      className="width-small color"
+                      className="width-small"
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      // onChange={handleChangeSeries}
+                      value={
+                        addSeries.school_class?.split(' ')[0] +
+                        ' ' +
+                        addSeries.school_class?.split(' ')[1]
+                      }
+                      onChange={e => handleChangeClassFristPart(e.target.value)}
                     >
-                      <MenuItem value={1}> 1º Ano </MenuItem>
-                      <MenuItem value={2}> 2º Ano </MenuItem>
-                      <MenuItem value={3}> 3º Ano </MenuItem>
-                      <MenuItem value={4}> 4º Ano </MenuItem>
-                      <MenuItem value={5}> 5º Ano </MenuItem>
-                      <MenuItem value={6}> 6º Ano </MenuItem>
-                      <MenuItem value={7}> 7º Ano </MenuItem>
-                      <MenuItem value={8}> 8º Ano </MenuItem>
-                      <MenuItem value={9}> 9º Ano </MenuItem>
-                      <MenuItem value={10}> 1ª Serie </MenuItem>
-                      <MenuItem value={11}> 2º Serie </MenuItem>
-                      <MenuItem value={12}> 3º Serie </MenuItem>
+                      <MenuItem value={'1º Ano'}> 1º Ano </MenuItem>
+                      <MenuItem value={'2º Ano'}> 2º Ano </MenuItem>
+                      <MenuItem value={'3º Ano'}> 3º Ano </MenuItem>
+                      <MenuItem value={'4º Ano'}> 4º Ano </MenuItem>
+                      <MenuItem value={'5º Ano'}> 5º Ano </MenuItem>
+                      <MenuItem value={'6º Ano'}> 6º Ano </MenuItem>
+                      <MenuItem value={'7º Ano'}> 7º Ano </MenuItem>
+                      <MenuItem value={'8º Ano'}> 8º Ano </MenuItem>
+                      <MenuItem value={'9º Ano'}> 9º Ano </MenuItem>
+                      <MenuItem value={'1ª Serie'}> 1ª Serie </MenuItem>
+                      <MenuItem value={'2ª Serie'}> 2ª Serie </MenuItem>
+                      <MenuItem value={'3ª Serie'}> 3ª Serie </MenuItem>
                     </Select>
                   </FormControl>
                 </li>
 
                 <li>
                   <FormControl>
-                    <InputLabel className="color">Turma:</InputLabel>
+                    <InputLabel>Turma:</InputLabel>
 
                     <Select
-                      className="width-small color"
+                      className="width-small"
                       labelId="demo-simple-select-label"
                       id="demo-simple-select"
-                      // onChange={e => {}}
+                      value={addSeries.school_class?.split(' ')[2]}
+                      onChange={e =>
+                        handleChangeClassSecondPart(
+                          e.target.value,
+                          addSeries.school_class
+                        )
+                      }
                     >
-                      <MenuItem value="A"> A </MenuItem>
-                      <MenuItem value="B"> B </MenuItem>
-                      <MenuItem value="C"> C </MenuItem>
+                      <MenuItem value={'A'}> A </MenuItem>
+                      <MenuItem value={'B'}> B </MenuItem>
+                      <MenuItem value={'C'}> C </MenuItem>
                     </Select>
                   </FormControl>
                 </li>
-              </UlHeader>
+              </Ul>
+
+              <Ul>
+                <li>
+                  <TextField
+                    label="Disciplina"
+                    type="text"
+                    value={addSeries.school_subjects}
+                    onChange={e =>
+                      setAddSeries({
+                        ...addSeries,
+                        school_subjects: e.target.value
+                      })
+                    }
+                  />
+                </li>
+              </Ul>
+            </>
+          )}
+          {settingData.isUpdate && (
+            <>
+              <Button
+                onClick={() => {
+                  handleClose()
+                }}
+              >
+                Cancelar
+              </Button>
+
+              <Button
+                onClick={() => {
+                  PUTSerie(dataSeries.id)
+                  handleClose()
+                }}
+              >
+                Salvar
+              </Button>
             </>
           )}
 
-          <Button
-            onClick={() => {
-              handleClose()
-            }}
-          >
-            Cancelar
-          </Button>
+          {settingData.isCreate && (
+            <>
+              <Button
+                onClick={() => {
+                  handleClose()
+                }}
+              >
+                Cancelar
+              </Button>
 
-          <Button
-            onClick={() => {
-              updateSerie(dataSeries.id)
-              handleClose()
-            }}
-          >
-            Salvar
-          </Button>
+              <Button
+                onClick={() => {
+                  POSTCreateSeries(dataSeries.id)
+                  handleClose()
+                }}
+                disabled={
+                  !(
+                    addSeries.school_class.length > 6 &&
+                    addSeries.school_subjects !== ' '
+                  )
+                }
+              >
+                Criar
+              </Button>
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </>
