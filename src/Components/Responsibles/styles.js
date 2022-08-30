@@ -6,7 +6,8 @@ export const ContainerStudant = styled.div`
   gap: 0 40px;
 `
 export const Container = styled.section`
-  width: 70vw;
+  max-width: 70vw;
+  width: 100%;
   margin: 2rem auto;
   padding: 1rem 1.5rem;
   border-radius: 8px;
@@ -18,6 +19,20 @@ export const Container = styled.section`
     width: 92%;
   }
 `
+
+export const Content = styled.div`
+  margin: 1.5rem 0;
+
+  .color * {
+    color: white;
+  }
+
+  span {
+    color: red;
+    font-size: 0.75rem;
+  }
+`
+
 export const H1 = styled.h1`
   text-align: center;
 `

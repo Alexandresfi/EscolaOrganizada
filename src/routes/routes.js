@@ -10,6 +10,7 @@ import { Education3 } from '../Components/Notas/Pages/Education_3'
 import { TablesNotas } from '../Components/Notas/Pages/Table'
 import { ContainerResponsible } from '../Components/Responsibles'
 import { Parent } from '../Components/Responsibles/ManageResponsibles/CreateDelete'
+import { UpdateData } from '../Components/Responsibles/ManageResponsibles/Update'
 // import { RegistrationParents } from '../Components/Responsibles/Registration'
 import { ContainerTeachers } from '../Components/TeacherManagement'
 import { Teacher } from '../Components/TeacherManagement/ManageTeacher/CreateDelete'
@@ -37,6 +38,8 @@ export function Rotas() {
         <PrivateRoute exact path="/parentes" component={ContainerResponsible} />
 
         <PrivateRoute exact path="/parent/create" component={Parent} />
+
+        <PrivateRoute exact path="/parent/update" component={UpdateData} />
 
         <PrivateRoute exact path="/grades" component={CardNotas} />
 

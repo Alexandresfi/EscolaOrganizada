@@ -78,7 +78,7 @@ export function DeleteParents() {
     const filterStudents = dependent?.filter(
       student => student.responsible_id === parent
     )
-    return filterStudents[0]?.name
+    return filterStudents
   }
 
   useEffect(() => {
@@ -138,7 +138,11 @@ export function DeleteParents() {
                 <TableCell align="center">{parent.responsible_2}</TableCell>
 
                 <TableCell align="center">
-                  {filtedStudents(parent.email)}
+                  {filtedStudents(parent.email)?.map(student => (
+                    <ul key={student.id}>
+                      <li>{student.name}</li>
+                    </ul>
+                  ))}
                 </TableCell>
 
                 <TableCell align="center">
