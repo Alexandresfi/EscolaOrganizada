@@ -90,7 +90,7 @@ export function DeleteTeacher() {
             <TableRow>
               <TableCell align="center">Professor(a)</TableCell>
 
-              <TableCell align="center">Disciplina</TableCell>
+              <TableCell align="center">Disciplinas</TableCell>
 
               <TableCell align="center">Anos e turmas</TableCell>
 
@@ -99,22 +99,22 @@ export function DeleteTeacher() {
           </TableHead>
 
           <TableBody>
-            {teacherData?.map(teacher => (
-              <TableRow key={teacher.id}>
-                <TableCell align="center">{teacher.surname}</TableCell>
-
-                <TableCell align="center">
-                  {teacher.school_class?.map((subject, index) => (
-                    <ul key={index}>
-                      <li>{subject}</li>
-                    </ul>
-                  ))}
-                </TableCell>
+            {teacherData?.map((teacher, index) => (
+              <TableRow key={index}>
+                <TableCell align="center">{teacher.fullname}</TableCell>
 
                 <TableCell align="center">
                   {teacher.school_subjects?.map((serie, index) => (
                     <ul key={index}>
                       <li>{serie}</li>
+                    </ul>
+                  ))}
+                </TableCell>
+
+                <TableCell align="center">
+                  {teacher.school_class?.map((subject, index) => (
+                    <ul key={index}>
+                      <li style={{ textTransform: 'capitalize' }}>{subject}</li>
                     </ul>
                   ))}
                 </TableCell>

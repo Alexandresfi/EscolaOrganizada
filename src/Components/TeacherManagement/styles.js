@@ -20,6 +20,10 @@ export const H1 = styled.h1`
 export const Content = styled.div`
   margin: 1.5rem 0;
 
+  .color * {
+    color: white;
+  }
+
   span {
     color: red;
     font-size: 0.75rem;
@@ -30,4 +34,29 @@ export const HearderProgress = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`
+
+export const Ul = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  margin-top: 10px;
+
+  li {
+    margin-right: 4rem;
+    list-style: none;
+
+    .width-select {
+      width: 140px;
+    }
+
+    .width-small {
+      width: 95px;
+    }
+  }
+
+  li *,
+  .color * {
+    color: white;
+  }
 `
