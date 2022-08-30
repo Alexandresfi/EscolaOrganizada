@@ -14,10 +14,10 @@ import {
 } from '@material-ui/core'
 import { Alert } from '@material-ui/lab'
 
-import ButtonBack from '../ButtonBack'
-import Button from '../ButtonProceed'
-import { Content } from '../TeacherManagement/styles'
-import { ContainerStudant } from './styles'
+import ButtonBack from '../../ButtonBack'
+import Button from '../../ButtonProceed'
+import { Content } from '../../TeacherManagement/styles'
+import { ContainerStudant } from '../styles'
 
 export function StudentsData({ formik }) {
   const history = useHistory()

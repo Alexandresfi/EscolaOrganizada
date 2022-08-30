@@ -6,11 +6,11 @@ import PropTypes from 'prop-types'
 import { TextField } from '@material-ui/core'
 import { validate } from 'gerador-validador-cpf'
 
-import { phoneMask } from '../../utils/maskCellPhone'
-import { cpfMask } from '../../utils/maskCpf'
-import ButtonBack from '../ButtonBack'
-import Button from '../ButtonProceed'
-import { Content } from '../TeacherManagement/styles'
+import { phoneMask } from '../../../utils/maskCellPhone'
+import { cpfMask } from '../../../utils/maskCpf'
+import ButtonBack from '../../ButtonBack'
+import Button from '../../ButtonProceed'
+import { Content } from '../../TeacherManagement/styles'
 
 export function PersonDataParents({ formik, updatePageProgress }) {
   const history = useHistory()
