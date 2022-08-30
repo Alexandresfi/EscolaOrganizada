@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 
 import { TextField } from '@material-ui/core'
 
-import ButtonBack from '../ButtonBack'
-import Button from '../ButtonProceed'
-import { Content } from '../TeacherManagement/styles'
+import ButtonBack from '../../ButtonBack'
+import Button from '../../ButtonProceed'
+import { Content } from '../../TeacherManagement/styles'
 
 export function AddressData({ formik, updatePageProgress }) {
   const [errorCep, setErrorCep] = useState(false)

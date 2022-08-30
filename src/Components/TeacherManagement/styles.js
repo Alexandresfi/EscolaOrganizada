@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 
 export const Container = styled.section`
-  width: 70vw;
+  max-width: 70vw;
+  width: 100%;
   margin: 2rem auto;
   padding: 1rem 1.5rem;
   border-radius: 8px;
