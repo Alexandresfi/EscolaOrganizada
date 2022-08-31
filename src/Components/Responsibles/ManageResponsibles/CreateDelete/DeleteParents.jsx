@@ -15,35 +15,19 @@ import {
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 import { apiEscola } from '../../../../services/api'
+import { UseParent } from '../../../../hooks/ParentsContext'
+import { UseStudent } from '../../../../hooks/StudentsContext'
 
 export function DeleteParents() {
   const [reload, setReload] = useState(false)
-  const [parentsData, setParentsData] = useState([{}])
-  const [dependent, setDependent] = useState([])
-
-  const loadParentsData = () => {
-    const existParents = localStorage.getItem('escolaOrganizada:parentsData')
-    const existDependent = localStorage.getItem('escolaOrganizada:studentsData')
-    if (existParents && existDependent) {
-      setParentsData(JSON.parse(existParents))
-      setDependent(JSON.parse(existDependent))
-      return true
-    } else {
-      return false
-    }
-  }
+  const { parentsData, setParentsData } = UseParent()
+  const { studentsData, setStudentsData } = UseStudent()
 
   const getStudentsData = async () => {
     try {
-      if (!loadParentsData()) {
-        const { data } = await apiEscola.get('students')
+      const { data } = await apiEscola.get('students')
 
-        await localStorage.setItem(
-          'escolaOrganizada:studentsData',
-          JSON.stringify(data)
-        )
-        setDependent(data)
-      }
+      setStudentsData(data)
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
     }
@@ -51,23 +35,16 @@ export function DeleteParents() {
 
   const getParentsData = async () => {
     try {
-      if (!loadParentsData()) {
-        const { status, data } = await toast.promise(apiEscola.get('users'), {
-          pending: '🔎 Buscando informações'
-        })
+      const { status, data } = await toast.promise(apiEscola.get('users'), {
+        pending: '🔎 Buscando informações'
+      })
 
-        if (status === 200) {
-          toast.success('Informações carregadas com sucesso 🔎')
-          getStudentsData()
-          setParentsData(data)
-          await localStorage.setItem(
-            'escolaOrganizada:parentsData',
-            JSON.stringify(data)
-          )
-          getStudentsData()
-        } else {
-          throw new Error()
-        }
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        getStudentsData()
+        setParentsData(data)
+      } else {
+        throw new Error()
       }
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
@@ -75,7 +52,7 @@ export function DeleteParents() {
   }
 
   const filtedStudents = parent => {
-    const filterStudents = dependent?.filter(
+    const filterStudents = studentsData?.filter(
       student => student.responsible_id === parent
     )
     return filterStudents
@@ -86,7 +63,7 @@ export function DeleteParents() {
   }, [reload])
 
   const deleteParents = async (id, idStudent) => {
-    const filterStudents = dependent?.filter(
+    const filterStudents = studentsData?.filter(
       student => student.responsible_id === idStudent
     )
 
@@ -102,9 +79,7 @@ export function DeleteParents() {
 
       if (status) {
         toast.success('Usuário deletedo!')
-        await localStorage.removeItem('escolaOrganizada:parentsData')
 
-        await localStorage.removeItem('escolaOrganizada:studentsData')
         setReload(t => !t)
       } else {
         throw new Error()

@@ -28,6 +28,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { Content } from '../../styles'
+import { UseTeacher } from '../../../../hooks/TeacherContext'
 
 const initialValues = {
   fullname: '',
@@ -63,6 +64,7 @@ const validation = Yup.object().shape({
 })
 
 export function UpdateData() {
+  const { teachersData, setTeachersData } = UseTeacher()
   const [reload, setReload] = useState(false)
   const [show, setShow] = useState(false)
   const [errorCep, setErrorCep] = useState(false)
@@ -78,23 +80,10 @@ export function UpdateData() {
     complement: ''
   })
 
-  const [teachersData, setTeachersData] = useState([{}])
-
   const formik = useFormik({
     initialValues,
     validationSchema: validation
   })
-
-  const loadTeacherData = () => {
-    const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
-
-    if (existTeacher) {
-      setTeachersData(JSON.parse(existTeacher))
-      return true
-    } else {
-      return false
-    }
-  }
 
   const CompleteFields = data => {
     formik.setFieldValue('fullname', data.fullname)
@@ -138,7 +127,6 @@ export function UpdateData() {
 
       if (status === 200) {
         toast.success('Dados atualizados com sucesso 📗')
-        await localStorage.removeItem('escolaOrganizada:teacherData')
         setReload(t => !t)
       } else {
         throw new Error()
@@ -150,25 +138,15 @@ export function UpdateData() {
 
   const getTeachersData = async () => {
     try {
-      if (!loadTeacherData()) {
-        const { status, data } = await toast.promise(
-          apiEscola.get('teachers'),
-          {
-            pending: '🔎 Buscando informações'
-          }
-        )
+      const { status, data } = await toast.promise(apiEscola.get('teachers'), {
+        pending: '🔎 Buscando informações'
+      })
 
-        if (status === 200) {
-          toast.success('Informações carregadas com sucesso 🔎')
-          setTeachersData(data)
-
-          await localStorage.setItem(
-            'escolaOrganizada:teacherData',
-            JSON.stringify(data)
-          )
-        } else {
-          throw new Error()
-        }
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        setTeachersData(data)
+      } else {
+        throw new Error()
       }
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
