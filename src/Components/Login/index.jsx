@@ -65,7 +65,7 @@ export function Login() {
 
           setTimeout(() => {
             history.push('/home')
-          }, 4000)
+          }, 2000)
         } else if (status === 400) {
           toast.error('Verifique seu e-mail, senha e o tipo de acesso 😔')
         } else {

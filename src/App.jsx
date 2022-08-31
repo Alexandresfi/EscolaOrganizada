@@ -3,15 +3,15 @@ import './App.css'
 import { ToastContainer } from 'react-toastify'
 
 import { GlobalStyle } from './Components/global'
-import { UserProvider } from './hooks/UserContext'
 import { Rotas } from './routes/routes'
+import { AppProvider } from './hooks'
 
 function App() {
   return (
     <>
-      <UserProvider>
+      <AppProvider>
         <Rotas />
-      </UserProvider>
+      </AppProvider>
       <ToastContainer autoClose={4000} theme="colored" />
       <GlobalStyle />
     </>
