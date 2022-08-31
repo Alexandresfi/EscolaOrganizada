@@ -1,10 +1,9 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import Education1 from '../../assects/Education_1.png'
 import Education2 from '../../assects/Education_2.png'
 import Education3 from '../../assects/Education_3.png'
-import { List, Container } from './styles'
+import CardsInfos from '../CardsInfos'
 
 export function CardNotas() {
   const infoCards = [
@@ -24,20 +23,5 @@ export function CardNotas() {
       image: Education3
     }
   ]
-  return (
-    <nav>
-      <List>
-        {infoCards?.map((infoCard, index) => (
-          <li key={index}>
-            <Link to={infoCard.link}>
-              <Container>
-                <img src={infoCard.image} alt="imagem" />
-                <p>{infoCard.title}</p>
-              </Container>
-            </Link>
-          </li>
-        ))}
-      </List>
-    </nav>
-  )
+  return <CardsInfos infoCards={infoCards} />
 }
