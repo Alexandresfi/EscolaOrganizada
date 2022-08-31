@@ -15,42 +15,23 @@ import {
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
 import { apiEscola } from '../../../../services/api'
+import { UseTeacher } from '../../../../hooks/TeacherContext'
 
 export function DeleteTeacher() {
   const [reload, setReload] = useState(false)
-  const [teacherData, setTeacherData] = useState([{}])
-
-  const loadTeacherData = () => {
-    const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
-
-    if (existTeacher) {
-      setTeacherData(JSON.parse(existTeacher))
-      return true
-    } else {
-      return false
-    }
-  }
+  const { teachersData, setTeachersData } = UseTeacher()
 
   const getTeacherData = async () => {
     try {
-      if (!loadTeacherData()) {
-        const { status, data } = await toast.promise(
-          apiEscola.get('teachers'),
-          {
-            pending: '🔎 Buscando informações'
-          }
-        )
+      const { status, data } = await toast.promise(apiEscola.get('teachers'), {
+        pending: '🔎 Buscando informações'
+      })
 
-        if (status === 200) {
-          toast.success('Informações carregadas com sucesso 🔎')
-          setTeacherData(data)
-          await localStorage.setItem(
-            'escolaOrganizada:teacherData',
-            JSON.stringify(data)
-          )
-        } else {
-          throw new Error()
-        }
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        setTeachersData(data)
+      } else {
+        throw new Error()
       }
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
@@ -72,7 +53,6 @@ export function DeleteTeacher() {
 
       if (status) {
         toast.success('Usuário deletedo!')
-        await localStorage.removeItem('escolaOrganizada:teacherData')
         setReload(t => !t)
       } else {
         throw new Error()
@@ -99,7 +79,7 @@ export function DeleteTeacher() {
           </TableHead>
 
           <TableBody>
-            {teacherData?.map((teacher, index) => (
+            {teachersData?.map((teacher, index) => (
               <TableRow key={index}>
                 <TableCell align="center">{teacher.fullname}</TableCell>
 

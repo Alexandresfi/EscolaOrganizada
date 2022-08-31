@@ -26,9 +26,11 @@ import EditIcon from '@material-ui/icons/Edit'
 
 import { apiEscola } from '../../../../services/api'
 import { Ul } from '../../styles'
+import { UseTeacher } from '../../../../hooks/TeacherContext'
 
 export function UpdateClass() {
   const [show, setShow] = useState(false)
+  const { teachersData, setTeachersData } = UseTeacher()
   const [reload, setReload] = useState(false)
   const [dataSeries, setDataSeries] = useState({
     id: null,
@@ -39,44 +41,23 @@ export function UpdateClass() {
     isCreate: false,
     isUpdate: false
   })
-  const [teachersData, setTeachersData] = useState([{}])
   const [addSeries, setAddSeries] = useState({
     school_class: ' ',
     school_subjects: ' '
   })
   // conexão com banco de dados
 
-  const loadTeachersData = () => {
-    const existTeacher = localStorage.getItem('escolaOrganizada:teacherData')
-
-    if (existTeacher) {
-      setTeachersData(JSON.parse(existTeacher))
-      return true
-    } else {
-      return false
-    }
-  }
-
   const getTeachersData = async () => {
     try {
-      if (!loadTeachersData()) {
-        const { status, data } = await toast.promise(
-          apiEscola.get('teachers'),
-          {
-            pending: '🔎 Buscando informações'
-          }
-        )
+      const { status, data } = await toast.promise(apiEscola.get('teachers'), {
+        pending: '🔎 Buscando informações'
+      })
 
-        if (status === 200) {
-          toast.success('Informações carregadas com sucesso 🔎')
-          setTeachersData(data)
-          await localStorage.setItem(
-            'escolaOrganizada:teacherData',
-            JSON.stringify(data)
-          )
-        } else {
-          throw new Error()
-        }
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        setTeachersData(data)
+      } else {
+        throw new Error()
       }
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
@@ -101,7 +82,6 @@ export function UpdateClass() {
 
       if (status === 200) {
         toast.success('Dados atualizados com sucesso 📗')
-        await localStorage.removeItem('escolaOrganizada:teacherData')
         setReload(t => !t)
       } else {
         throw new Error()

@@ -24,6 +24,8 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import { Content } from '../../styles'
+import { UseParent } from '../../../../hooks/ParentsContext'
+import { UseStudent } from '../../../../hooks/StudentsContext'
 
 const initialValues = {
   responsible_1: '',
@@ -66,6 +68,8 @@ const validation = Yup.object().shape({
 
 export function UpdateData() {
   const [reload, setReload] = useState(false)
+  const { studentsData, setStudentsData } = UseStudent()
+  const { parentsData, setParentsData } = UseParent()
   const [show, setShow] = useState(false)
   const [errorCep, setErrorCep] = useState(false)
   const [parentInfo, setParentInfo] = useState({
@@ -86,25 +90,10 @@ export function UpdateData() {
     state: ''
   })
 
-  const [parentsData, setParentsData] = useState([{}])
-  const [dependent, setDependent] = useState([])
-
   const formik = useFormik({
     initialValues,
     validationSchema: validation
   })
-
-  const loadParentsData = () => {
-    const existParents = localStorage.getItem('escolaOrganizada:parentsData')
-    const existDependent = localStorage.getItem('escolaOrganizada:studentsData')
-    if (existParents && existDependent) {
-      setParentsData(JSON.parse(existParents))
-      setDependent(JSON.parse(existDependent))
-      return true
-    } else {
-      return false
-    }
-  }
 
   const CompleteFields = (data, dataStudent) => {
     formik.setFieldValue('responsible_1', data.responsible_1)
@@ -120,7 +109,7 @@ export function UpdateData() {
   }
 
   const updateResponsiblesData = async (id, idStudent) => {
-    const filterStudents = dependent?.filter(
+    const filterStudents = studentsData?.filter(
       student => student.responsible_id === idStudent
     )
     try {
@@ -159,9 +148,7 @@ export function UpdateData() {
 
       if (status === 201) {
         toast.success('Dados atualizados com sucesso 📗')
-        await localStorage.removeItem('escolaOrganizada:parentsData')
 
-        await localStorage.removeItem('escolaOrganizada:studentsData')
         setReload(t => !t)
       } else {
         throw new Error()
@@ -173,15 +160,9 @@ export function UpdateData() {
 
   const getStudentsData = async () => {
     try {
-      if (!loadParentsData()) {
-        const { data } = await apiEscola.get('students')
+      const { data } = await apiEscola.get('students')
 
-        await localStorage.setItem(
-          'escolaOrganizada:studentsData',
-          JSON.stringify(data)
-        )
-        setDependent(data)
-      }
+      setStudentsData(data)
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
     }
@@ -189,23 +170,16 @@ export function UpdateData() {
 
   const getParentsData = async () => {
     try {
-      if (!loadParentsData()) {
-        const { status, data } = await toast.promise(apiEscola.get('users'), {
-          pending: '🔎 Buscando informações'
-        })
+      const { status, data } = await toast.promise(apiEscola.get('users'), {
+        pending: '🔎 Buscando informações'
+      })
 
-        if (status === 200) {
-          toast.success('Informações carregadas com sucesso 🔎')
-          getStudentsData()
-          setParentsData(data)
-          await localStorage.setItem(
-            'escolaOrganizada:parentsData',
-            JSON.stringify(data)
-          )
-          getStudentsData()
-        } else {
-          throw new Error()
-        }
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        getStudentsData()
+        setParentsData(data)
+      } else {
+        throw new Error()
       }
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
@@ -244,7 +218,7 @@ export function UpdateData() {
     setParentInfo(parentsData.find(parent => parent.id === id))
     CompleteFields(
       parentsData.find(parent => parent.id === id),
-      dependent.find(item => item.responsible_id === idStudent)
+      studentsData.find(item => item.responsible_id === idStudent)
     )
   }
 
@@ -253,10 +227,12 @@ export function UpdateData() {
   return (
     <>
       <TableContainer component={Paper}>
-        <Table aria-label="teacher in class">
+        <Table aria-label="responsibles">
           <TableHead>
             <TableRow>
               <TableCell>Responsável 1</TableCell>
+              <TableCell>CPF</TableCell>
+              <TableCell>Celular</TableCell>
 
               <TableCell>Ações</TableCell>
             </TableRow>
@@ -266,6 +242,8 @@ export function UpdateData() {
             {parentsData?.map(parent => (
               <TableRow key={parent.id}>
                 <TableCell>{parent.responsible_1}</TableCell>
+                <TableCell>{parent.cpf_1}</TableCell>
+                <TableCell>{parent.telephone_1}</TableCell>
 
                 <TableCell>
                   <Tooltip title="editar">
