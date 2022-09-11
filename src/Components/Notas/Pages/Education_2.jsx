@@ -1,44 +1,69 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
+import { UseStudent } from '../../../hooks/StudentsContext'
+import { apiEscola } from '../../../services/api'
 import { ClassCards } from '../../ClassCards'
 import { List } from './styles'
 
 export function Education2() {
-  const infoClassCards = [
-    {
-      // link: '/fivity-year',
-      link: '/frist-year',
-      title: '5º Ano',
-      classes: ['a', 'b', 'c', 'd']
-    },
-    {
-      link: '/sixth-year',
-      title: '6º Ano',
-      classes: ['a', 'b', 'c', 'd']
-    },
-    {
-      link: '/seventh-year',
-      title: '7º Ano',
-      classes: ['a', 'b', 'c', 'd']
-    },
-    {
-      link: '/eighth-year',
-      title: '8º Ano',
-      classes: ['a', 'b', 'c', 'd']
-    },
-    {
-      link: '/nineth-year',
-      title: '9º Ano',
-      classes: ['a', 'b', 'c', 'd']
+  const { studentsData, setStudentsData } = UseStudent()
+  let [infoClassCards] = []
+
+  const getStudentsData = async () => {
+    try {
+      const { status, data } = await toast.promise(apiEscola.get('students'), {
+        pending: '🔎 Buscando informações'
+      })
+
+      if (status === 200) {
+        toast.success('Informações carregadas com sucesso 🔎')
+        setStudentsData(data)
+      } else {
+        throw new Error()
+      }
+    } catch (error) {
+      toast.error('Falha no sistema! Tente novamente. 🤷‍♂️')
     }
-  ]
+  }
+
+  useEffect(() => {
+    getStudentsData()
+  }, [])
+
+  studentsData.map(
+    turma =>
+      (infoClassCards = [
+        {
+          link: '/frist-year',
+          title: `${turma.year}º ano`,
+          classes: [turma.school_class]
+        }
+      ])
+  )
+
+  const recordingLocalStorege = async (year, schoolClass) => {
+    await localStorage.setItem(
+      'escolaorganizada:filterTurma',
+      JSON.stringify({
+        year,
+        schoolClass
+      })
+    )
+  }
+
   return (
     <nav>
       <List>
         {infoClassCards?.map((infoCard, index) => (
           <li key={index}>
-            <Link to={infoCard.link}>
+            <Link
+              to={infoCard.link}
+              onClick={() =>
+                recordingLocalStorege(infoCard.title, infoCard.classes)
+              }
+            >
               <ClassCards
                 year={infoCard.title}
                 schoolClass={infoCard.classes}

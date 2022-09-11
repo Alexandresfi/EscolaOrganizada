@@ -37,6 +37,8 @@ export const H1Login = styled.h1`
   font-weight: normal;
 
   color: white;
+
+  padding: 0 53px;
 `
 
 export const BoxRight = styled.div`
@@ -96,6 +98,10 @@ export const ContainerForm = styled.form`
   flex-direction: column;
   justify-content: space-around;
 
+  .color * {
+    color: white;
+  }
+
   button {
     width: 11.49rem;
     height: 3.625rem;
@@ -133,4 +139,11 @@ export const ContainerForm = styled.form`
       cursor: pointer;
     }
   }
+`
+
+export const MessageError = styled.div`
+  color: red;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
 `

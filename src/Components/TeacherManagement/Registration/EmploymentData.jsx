@@ -16,7 +16,7 @@ import { validate } from 'gerador-validador-cpf'
 
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
-import { Content } from '../styles'
+import { Content } from '../../Content'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />

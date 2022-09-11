@@ -23,7 +23,7 @@ import { apiEscola } from '../../../../services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { Content } from '../../styles'
+import { Content } from '../../../Content'
 import { UseParent } from '../../../../hooks/ParentsContext'
 import { UseStudent } from '../../../../hooks/StudentsContext'
 

@@ -3,7 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom'
 
 import GithubImg from '../../assects/Github.png'
 import LinkdinImg from '../../assects/Linkedin.png'
-import { ButtonHearder } from '../Header/styled'
+import { ButtonHearder } from '../../Containers/Header/styled'
 import { Container, Content, ContentInferior } from './styles'
 
 export function TitleDefaults() {
@@ -30,6 +30,8 @@ export function TitleDefaults() {
           {title?.type_acess === 'admin' && 'Admin: '}{' '}
           <span>
             {title.fullname?.split(' ')[0]} {title.fullname?.split(' ')[1]}
+            {title.responsible_1?.split(' ')[0]}{' '}
+            {title.responsible_1?.split(' ')[1]}
           </span>{' '}
         </p>
       </Content>
