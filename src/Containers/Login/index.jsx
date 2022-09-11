@@ -15,7 +15,8 @@ import {
   ButtonLoginGoogle,
   Container,
   ContainerForm,
-  H1Login
+  H1Login,
+  MessageError
 } from './styles'
 import { useUser } from '../../hooks/UserContext'
 
@@ -26,7 +27,7 @@ const initialValues = {
 }
 
 const validation = Yup.object().shape({
-  email: Yup.string().email().required('O e-mail pe obrigatório'),
+  email: Yup.string().email().required('O E-mail é obrigatório'),
   password: Yup.string()
     .min(8, 'precisa ter no mínimo 8 digitos')
     .required('E a senha, não vai colocar não?'),
@@ -87,7 +88,7 @@ export function Login() {
   return (
     <Container>
       <BoxLef>
-        <H1Login>Muito mais que um cólegio, uma segunda família...</H1Login>
+        <H1Login>Muito mais que um cólegio, uma segunda Família...</H1Login>
       </BoxLef>
 
       <BoxRight>
@@ -104,10 +105,10 @@ export function Login() {
             placeholder="colegio@exemplo.com"
             {...formik.getFieldProps('email')}
             required
-            style={{ color: 'white' }}
+            className="color"
           />
           {formik.touched.email && formik.errors.email ? (
-            <div>{formik.errors.email}</div>
+            <MessageError>{formik.errors.email}</MessageError>
           ) : null}
 
           <TextField
@@ -117,10 +118,10 @@ export function Login() {
             placeholder="Sua Senha"
             {...formik.getFieldProps('password')}
             required
-            style={{ color: 'white' }}
+            className="color"
           />
           {formik.touched.password && formik.errors.password ? (
-            <div>{formik.errors.password}</div>
+            <MessageError>{formik.errors.password}</MessageError>
           ) : null}
 
           <FormControl>
@@ -140,7 +141,7 @@ export function Login() {
             </Select>
           </FormControl>
           {formik.touched.type_acess && formik.errors.type_acess ? (
-            <div>{formik.errors.type_acess}</div>
+            <MessageError>{formik.errors.type_acess}</MessageError>
           ) : null}
 
           <button type="submit">Login</button>

@@ -8,7 +8,7 @@ import { TextField } from '@material-ui/core'
 
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
-import { Content } from '../../TeacherManagement/styles'
+import { Content } from '../../Content'
 
 export function AddressData({ formik, updatePageProgress }) {
   const [errorCep, setErrorCep] = useState(false)

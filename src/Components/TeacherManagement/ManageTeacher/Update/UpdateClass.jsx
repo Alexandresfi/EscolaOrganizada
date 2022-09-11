@@ -224,8 +224,6 @@ export function UpdateClass() {
     } catch (error) {
       toast.error('Falha no sistema! Tente novamente 🤷‍♂️')
     }
-
-    console.log(dataSeries)
   }
 
   return (

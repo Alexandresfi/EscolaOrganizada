@@ -20,19 +20,6 @@ export const Container = styled.section`
   }
 `
 
-export const Content = styled.div`
-  margin: 1.5rem 0;
-
-  .color * {
-    color: white;
-  }
-
-  span {
-    color: red;
-    font-size: 0.75rem;
-  }
-`
-
 export const H1 = styled.h1`
   text-align: center;
 `

@@ -27,7 +27,7 @@ import { apiEscola } from '../../../../services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { Content } from '../../styles'
+import { Content } from '../../../Content'
 import { UseTeacher } from '../../../../hooks/TeacherContext'
 
 const initialValues = {

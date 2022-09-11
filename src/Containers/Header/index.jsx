@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 
 import LogoImg from '../../assects/Logo.png'
-import { TitleDefaults } from '../TitleDefault'
+import { TitleDefaults } from '../../Components/TitleDefault'
 import { MenuMobile } from './MenuMobile'
 import { ButtonHearder, ButtonMobile, Container, UlHeader } from './styled'
 
@@ -47,18 +47,18 @@ export function Header() {
                 value={series}
                 onChange={handleChangeSeries}
               >
-                <MenuItem value={1}> 1º Ano </MenuItem>
-                <MenuItem value={2}> 2º Ano </MenuItem>
-                <MenuItem value={3}> 3º Ano </MenuItem>
-                <MenuItem value={4}> 4º Ano </MenuItem>
-                <MenuItem value={5}> 5º Ano </MenuItem>
-                <MenuItem value={6}> 6º Ano </MenuItem>
-                <MenuItem value={7}> 7º Ano </MenuItem>
-                <MenuItem value={8}> 8º Ano </MenuItem>
-                <MenuItem value={9}> 9º Ano </MenuItem>
-                <MenuItem value={10}> 1ª Serie </MenuItem>
-                <MenuItem value={11}> 2º Serie </MenuItem>
-                <MenuItem value={12}> 3º Serie </MenuItem>
+                <MenuItem value="1º Ano"> 1º Ano </MenuItem>
+                <MenuItem value="2º Ano"> 2º Ano </MenuItem>
+                <MenuItem value="3º Ano"> 3º Ano </MenuItem>
+                <MenuItem value="4º Ano"> 4º Ano </MenuItem>
+                <MenuItem value="5º Ano"> 5º Ano </MenuItem>
+                <MenuItem value="6º Ano"> 6º Ano </MenuItem>
+                <MenuItem value="7º Ano"> 7º Ano </MenuItem>
+                <MenuItem value="8º Ano"> 8º Ano </MenuItem>
+                <MenuItem value="9º Ano"> 9º Ano </MenuItem>
+                <MenuItem value="1ª Serie"> 1ª Serie </MenuItem>
+                <MenuItem value="2ª Serie"> 2º Serie </MenuItem>
+                <MenuItem value="3ª Serie"> 3º Serie </MenuItem>
               </Select>
             </FormControl>
           </li>

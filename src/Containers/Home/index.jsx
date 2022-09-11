@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import ContentReportImg from '../../assects/contentReport.png'
 import FrequencyImg from '../../assects/frequencyList.png'
@@ -8,11 +7,14 @@ import ImpressoraImg from '../../assects/impressora.png'
 import ParentsImg from '../../assects/parents.png'
 import ReportImg from '../../assects/report.png'
 import TeacherImg from '../../assects/teacher.png'
-import { CardHome } from '../Card'
-import { List } from './styles'
+import CardsInfos from '../../Components/CardsInfos'
 
 export function Home() {
-  const infoCards = [
+  const admin =
+    JSON.parse(localStorage.getItem('escolaorganizada:userData')).type_acess ===
+    'admin'
+
+  let infoCards = [
     {
       link: '/teacher',
       image: TeacherImg,
@@ -49,17 +51,34 @@ export function Home() {
       title: 'Impressões'
     }
   ]
-  return (
-    <nav>
-      <List>
-        {infoCards?.map((infoCard, index) => (
-          <li key={index}>
-            <Link to={infoCard.link}>
-              <CardHome image={infoCard.image} title={infoCard.title} />
-            </Link>
-          </li>
-        ))}
-      </List>
-    </nav>
-  )
+
+  !admin &&
+    (infoCards = [
+      {
+        link: '/grades',
+        image: GradesImg,
+        title: 'Notas'
+      },
+      {
+        link: '/frequency',
+        image: FrequencyImg,
+        title: 'Frequência'
+      },
+      {
+        link: '/report',
+        image: ReportImg,
+        title: 'Relatório Trimestral'
+      },
+      {
+        link: '/content report',
+        image: ContentReportImg,
+        title: 'Relatório de Conteúdos'
+      },
+      {
+        link: '/impressions',
+        image: ImpressoraImg,
+        title: 'Impressões'
+      }
+    ])
+  return <CardsInfos infoCards={infoCards} home />
 }

@@ -16,7 +16,7 @@ import { Alert } from '@material-ui/lab'
 
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
-import { Content } from '../../TeacherManagement/styles'
+import { Content } from '../../Content'
 import { ContainerStudant } from '../styles'
 
 export function StudentsData({ formik }) {

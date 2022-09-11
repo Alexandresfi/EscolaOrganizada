@@ -9,27 +9,27 @@ export function Education1() {
     {
       link: '/frist-year',
       title: '1º Ano',
-      classes: ['a', 'b', 'c', 'd']
+      classes: ['a', 'b', 'c']
     },
     {
       link: '/second-year',
       title: '2º Ano',
-      classes: ['a', 'b', 'c', 'd']
+      classes: ['a', 'b', 'c']
     },
     {
       link: '/thirs-year',
       title: '3º Ano',
-      classes: ['a', 'b', 'c', 'd']
+      classes: ['a', 'b', 'c']
     },
     {
       link: '/fourth-year',
       title: '4º Ano',
-      classes: ['a', 'b', 'c', 'd']
+      classes: ['a', 'b', 'c']
     },
     {
       link: '/fifth-year',
       title: '5º Ano',
-      classes: ['a', 'b', 'c', 'd']
+      classes: ['a', 'b', 'c']
     }
   ]
 

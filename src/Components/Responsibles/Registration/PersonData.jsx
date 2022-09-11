@@ -10,7 +10,7 @@ import { phoneMask } from '../../../utils/maskCellPhone'
 import { cpfMask } from '../../../utils/maskCpf'
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
-import { Content } from '../../TeacherManagement/styles'
+import { Content } from '../../Content'
 
 export function PersonDataParents({ formik, updatePageProgress }) {
   const history = useHistory()

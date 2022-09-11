@@ -13,7 +13,7 @@ import {
 
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
-import { Content } from '../styles'
+import { Content } from '../../Content'
 
 export function PersonData({ formik, updatePageProgress }) {
   const history = useHistory()
