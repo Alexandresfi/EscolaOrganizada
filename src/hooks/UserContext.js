@@ -23,12 +23,17 @@ export function UserProvider({ children }) {
     }
   }
 
+  const logout = async () => {
+    await localStorage.removeItem('escolaorganizada:userData')
+    await localStorage.removeItem('escolaorganizada:filterTurma')
+  }
+
   useEffect(() => {
     loadUserData()
   }, [])
 
   return (
-    <UserContext.Provider value={{ putUserData, userData }}>
+    <UserContext.Provider value={{ putUserData, userData, logout }}>
       {children}
     </UserContext.Provider>
   )

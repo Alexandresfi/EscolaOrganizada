@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 
@@ -7,8 +7,11 @@ import LogoImg from '../../assects/Logo.png'
 import { TitleDefaults } from '../../Components/TitleDefault'
 import { MenuMobile } from './MenuMobile'
 import { ButtonHearder, ButtonMobile, Container, UlHeader } from './styled'
+import { useUser } from '../../hooks/UserContext'
 
 export function Header() {
+  const { logout } = useUser()
+  const { push } = useHistory()
   const [series, setSeries] = useState(null)
   const [schoolClass, setSchoolClass] = useState('')
   const [cssMobile, setCssMobile] = useState(false)
@@ -19,6 +22,11 @@ export function Header() {
 
   const handleChangeSeries = event => {
     setSeries(event.target.value)
+  }
+
+  const logoutUser = () => {
+    logout()
+    push('/')
   }
 
   return (
@@ -83,7 +91,13 @@ export function Header() {
 
           <li>
             <ButtonHearder>
-              <Link to="/">Sair</Link>
+              <button
+                onClick={() => {
+                  logoutUser()
+                }}
+              >
+                Sair
+              </button>
             </ButtonHearder>
           </li>
         </UlHeader>
