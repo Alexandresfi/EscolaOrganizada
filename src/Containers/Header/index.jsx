@@ -90,14 +90,12 @@ export function Header() {
           </li>
 
           <li>
-            <ButtonHearder>
-              <button
-                onClick={() => {
-                  logoutUser()
-                }}
-              >
-                Sair
-              </button>
+            <ButtonHearder
+              onClick={() => {
+                logoutUser()
+              }}
+            >
+              Sair
             </ButtonHearder>
           </li>
         </UlHeader>
