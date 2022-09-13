@@ -38,7 +38,7 @@ const media = array => {
 }
 
 export function TablesFrequency() {
-  const [listStudantes, setListStudantes] = useState([
+  const [listStudantes] = useState([
     {
       id: 1,
       name: 'Alexandre Nascimento',

@@ -22,13 +22,12 @@ import {
   Tooltip
 } from '@material-ui/core'
 import EditIcon from '@material-ui/icons/Edit'
-
-import { apiEscola } from '../../../../services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
-import { Content } from '../../../Content'
 import { UseTeacher } from '../../../../hooks/TeacherContext'
+import { apiEscola } from '../../../../services/api'
+import { Content } from '../../../Content'
 
 const initialValues = {
   fullname: '',

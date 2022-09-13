@@ -8,6 +8,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 import GoggleImg from '../../assects/LogoGoogle.svg'
+import { useUser } from '../../hooks/UserContext'
 import { apiEscola } from '../../services/api'
 import {
   BoxLef,
@@ -18,7 +19,6 @@ import {
   H1Login,
   MessageError
 } from './styles'
-import { useUser } from '../../hooks/UserContext'
 
 const initialValues = {
   email: '',

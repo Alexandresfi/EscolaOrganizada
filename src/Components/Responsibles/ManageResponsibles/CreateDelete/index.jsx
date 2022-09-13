@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 import { FormControlLabel, Switch } from '@material-ui/core'
 
-import { DeleteParents } from './DeleteParents'
 import { RegistrationParents } from '../../Registration'
 import { Container, H1 } from '../../styles'
+import { DeleteParents } from './DeleteParents'
 
 export function Parent() {
   const [typeAction, setTypeAction] = useState({
