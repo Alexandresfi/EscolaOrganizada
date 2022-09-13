@@ -14,9 +14,9 @@ import {
 } from '@material-ui/core'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 
-import { apiEscola } from '../../../../services/api'
 import { UseParent } from '../../../../hooks/ParentsContext'
 import { UseStudent } from '../../../../hooks/StudentsContext'
+import { apiEscola } from '../../../../services/api'
 
 export function DeleteParents() {
   const [reload, setReload] = useState(false)

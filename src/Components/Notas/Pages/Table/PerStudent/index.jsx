@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 import {
   Box,
@@ -13,7 +14,6 @@ import {
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 
 import { UseStudent } from '../../../../../hooks/StudentsContext'
-import { toast } from 'react-toastify'
 import { apiEscola } from '../../../../../services/api'
 
 export function TablePerStudent() {
