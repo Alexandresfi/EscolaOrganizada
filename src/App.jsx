@@ -3,8 +3,8 @@ import './App.css'
 import { ToastContainer } from 'react-toastify'
 
 import { GlobalStyle } from './Components/global'
-import { Rotas } from './routes/routes'
 import { AppProvider } from './hooks'
+import { Rotas } from './routes/routes'
 
 function App() {
   return (

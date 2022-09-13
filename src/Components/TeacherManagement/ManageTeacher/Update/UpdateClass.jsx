@@ -24,9 +24,9 @@ import {
 import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 
+import { UseTeacher } from '../../../../hooks/TeacherContext'
 import { apiEscola } from '../../../../services/api'
 import { Ul } from '../../styles'
-import { UseTeacher } from '../../../../hooks/TeacherContext'
 
 export function UpdateClass() {
   const [show, setShow] = useState(false)

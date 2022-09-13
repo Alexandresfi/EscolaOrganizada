@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
-
 import { TextField } from '@material-ui/core'
 import { validate } from 'gerador-validador-cpf'
+import PropTypes from 'prop-types'
 
 import { phoneMask } from '../../../utils/maskCellPhone'
 import { cpfMask } from '../../../utils/maskCpf'

@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 
 import { FormControlLabel, Switch } from '@material-ui/core'
 
-import { DeleteTeacher } from './DeleteTeacher'
 import { Registration } from '../../Registration'
 import { Container, H1 } from '../../styles'
+import { DeleteTeacher } from './DeleteTeacher'
 
 export function Teacher() {
   const [typeAction, setTypeAction] = useState({

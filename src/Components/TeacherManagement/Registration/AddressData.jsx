@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
-
 import { TextField } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
