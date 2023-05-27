@@ -41,13 +41,13 @@
 
 <h2>Usando na sua máquina</h2>
 
-<p>Em seguida, vá para a pasta `/src` e execute o seguinte comando no terminal:</p>
+<p>Em seguida, vá para a uma pasta de sua preferência e execute o seguinte comando no terminal:</p>
 
 ```md
 git clone https://github.com/Alexandresfi/EscolaOrganizada.git
 ```
 
-Em seguida vá para a pasta `/src` e abra o terminal  e execute: 
+Em seguida vá para a pasta raiz do projeto e abra o terminal  e execute: 
 
 ```md
 yarn
