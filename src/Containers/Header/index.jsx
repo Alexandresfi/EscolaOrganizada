@@ -5,9 +5,9 @@ import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
 
 import LogoImg from '../../assects/Logo.png'
 import { TitleDefaults } from '../../Components/TitleDefault'
+import { useUser } from '../../hooks/UserContext'
 import { MenuMobile } from './MenuMobile'
 import { ButtonHearder, ButtonMobile, Container, UlHeader } from './styled'
-import { useUser } from '../../hooks/UserContext'
 
 export function Header() {
   const { logout } = useUser()

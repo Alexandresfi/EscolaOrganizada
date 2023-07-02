@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 import {
   Box,
@@ -25,7 +26,6 @@ import {
 } from '@mui/material'
 
 import { UseStudent } from '../../../../../hooks/StudentsContext'
-import { toast } from 'react-toastify'
 import { apiEscola } from '../../../../../services/api'
 
 export function TablePerQuarter() {

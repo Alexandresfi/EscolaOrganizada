@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
 import PropTypes from 'prop-types'
 
-import { List, Container } from './styles'
 import { CardHome } from '../Card'
+import { List, Container } from './styles'
 
 export default function CardsInfos({ infoCards, home }) {
   return (

@@ -8,9 +8,9 @@ import { useFormik } from 'formik'
 import PropTypes from 'prop-types'
 import * as Yup from 'yup'
 
+import { Container, HearderProgress } from '../../TeacherManagement/styles'
 import { AddressData } from './AddressData'
 import { PersonDataParents } from './PersonData'
-import { Container, HearderProgress } from '../../TeacherManagement/styles'
 import { StudentsData } from './StudentsData'
 
 function TabPanel(props) {

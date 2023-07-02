@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import EditIcon from '@mui/icons-material/Edit'
 import { IconButton } from '@mui/material'
@@ -38,7 +38,7 @@ const media = array => {
 }
 
 export function TablesFrequency() {
-  const [listStudantes, setListStudantes] = useState([
+  const [listStudantes] = [
     {
       id: 1,
       name: 'Alexandre Nascimento',
@@ -59,7 +59,7 @@ export function TablesFrequency() {
       name: 'Damiana Cordeiro',
       grades: [9, 8, 7]
     }
-  ])
+  ]
   return (
     <>
       <TableContainer component={Paper} style={{ margin: '40px 0' }}>

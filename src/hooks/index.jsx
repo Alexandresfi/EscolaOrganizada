@@ -1,10 +1,11 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 
 import { ParentProvider } from './ParentsContext'
+import { StudentProvider } from './StudentsContext'
 import { TeacherProvider } from './TeacherContext'
 import { UserProvider } from './UserContext'
-import { StudentProvider } from './StudentsContext'
 
 export const AppProvider = ({ children }) => {
   return (

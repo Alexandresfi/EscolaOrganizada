@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
-
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core'
+import PropTypes from 'prop-types'
 
 import { ButtonHearder, LiMobile, Menumobile } from './styled'
 
