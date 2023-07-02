@@ -88,7 +88,7 @@ export const ButtonMobile = styled.div`
       ${props =>
         props.menu &&
         css`
-          transform: rotate(135deg); ;
+          transform: rotate(135deg);
         `}
     }
   }
