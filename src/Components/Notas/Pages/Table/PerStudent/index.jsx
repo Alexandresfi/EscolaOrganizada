@@ -161,10 +161,12 @@ export function TablePerStudent() {
                     </TableCell>
                     <TableCell align="center">
                       {/* {(media(studant.grades?.[quarter]) / 3).toLocaleString()} */}
-                      {(subjects?.grades?.[quarter]?.nota_1 +
-                        +subjects?.grades?.[quarter]?.nota_2 +
-                        subjects?.grades?.[quarter]?.nota_3) /
-                        3}
+                      {(
+                        (subjects?.grades?.[quarter]?.nota_1 +
+                          +subjects?.grades?.[quarter]?.nota_2 +
+                          subjects?.grades?.[quarter]?.nota_3) /
+                        3
+                      ).toFixed(2)}
                     </TableCell>
                   </TableRow>
                 ))}

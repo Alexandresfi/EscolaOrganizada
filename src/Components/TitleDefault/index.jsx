@@ -14,7 +14,7 @@ export function TitleDefaults() {
 
   useEffect(() => {
     setTitle(JSON.parse(localStorage.getItem('escolaorganizada:userData')))
-  }, [localidation.pathname])
+  }, [localidation?.pathname])
 
   return (
     <Container>
@@ -38,7 +38,7 @@ export function TitleDefaults() {
 
       <ContentInferior>
         <li>
-          {localidation.pathname === '/home' && (
+          {localidation?.pathname === '/home' && (
             <a href="https://www.linkedin.com/in/alexandre-nascimento-66692920a/">
               <img src={LinkdinImg} alt="Linkedin" />
             </a>
@@ -46,7 +46,7 @@ export function TitleDefaults() {
         </li>
 
         <li>
-          {localidation.pathname === '/home' && (
+          {localidation?.pathname === '/home' && (
             <a href="https://github.com/Alexandresfi">
               <img src={GithubImg} alt="Linkedin" />
             </a>
@@ -54,7 +54,7 @@ export function TitleDefaults() {
         </li>
       </ContentInferior>
 
-      {localidation.pathname !== '/home' && (
+      {localidation?.pathname !== '/home' && (
         <ButtonHearder onClick={() => history.goBack()}> Voltar</ButtonHearder>
       )}
     </Container>

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 import { ClassCards } from '../../ClassCards'
 import { List } from './styles'
@@ -37,14 +36,12 @@ export function Education1() {
     <nav>
       <List>
         {infoClassCards?.map((infoCard, index) => (
-          <li key={index}>
-            <Link to={infoCard.link}>
-              <ClassCards
-                year={infoCard.title}
-                schoolClass={infoCard.classes}
-              />
-            </Link>
-          </li>
+          <ClassCards
+            key={index}
+            year={infoCard.title}
+            schoolClass={infoCard.classes}
+            link={infoCard.link}
+          />
         ))}
       </List>
     </nav>

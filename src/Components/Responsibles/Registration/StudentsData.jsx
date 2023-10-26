@@ -12,6 +12,7 @@ import {
 import { Alert } from '@material-ui/lab'
 import PropTypes from 'prop-types'
 
+import { apiEscola } from '../../../services/api'
 import ButtonBack from '../../ButtonBack'
 import Button from '../../ButtonProceed'
 import { Content } from '../../Content'
@@ -19,7 +20,6 @@ import { ContainerStudant } from '../styles'
 
 export function StudentsData({ formik }) {
   const history = useHistory()
-
   const [open, setOpen] = useState(false)
 
   const time = 1000
@@ -38,6 +38,52 @@ export function StudentsData({ formik }) {
 
   const handleChangeSeries = event => {
     formik.setFieldValue('scholl_year_student', event.target.value)
+  }
+
+  const createUser = async () => {
+    try {
+      await apiEscola.post('/user', {
+        responsible_1: formik.values.responsible_1,
+        email: formik.values.email,
+        kinshi_1: formik.values.kinshi_1,
+        cpf_1: formik.values.cpf_1,
+        telephone_1: formik.values.telephone_1,
+        birthdate: '19/09/1994',
+        responsible_2: formik.values.responsible_2,
+        kinshi_2: formik.values.kinshi_2,
+        cpf_2: formik.values.cpf_2,
+        telephone_2: formik.values.telephone_2,
+        password: '12345678'
+      })
+
+      setOpen(true)
+      setTimeout(() => {
+        history.push('/parentes')
+      }, time)
+    } catch (error) {
+      console.log(error, formik.values.cpf_1)
+    }
+  }
+
+  const createAddressUser = async () => {
+    try {
+      await apiEscola.post('/address', {
+        id: formik.values.cpf_1,
+        zip_code: formik.values.zipCode,
+        street: formik.values.street,
+        house_number: formik.values.housenumber,
+        complement: formik.values.complement,
+        city: formik.values.city,
+        district: formik.values.district,
+        state: formik.values.state
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const RegistrationFinish = async () => {
+    await Promise.all([createAddressUser(), createUser()])
   }
 
   return (
@@ -142,11 +188,7 @@ export function StudentsData({ formik }) {
 
       <Button
         onClick={() => {
-          setOpen(true)
-          console.log(formik.values)
-          setTimeout(() => {
-            history.push('/home')
-          }, time)
+          RegistrationFinish()
         }}
         disabled={!(formik.values.name && formik.values.birthdate_student)}
       >
@@ -156,7 +198,7 @@ export function StudentsData({ formik }) {
       <ButtonBack
         onClick={() => {
           formik.setValues()
-          history.push('/home')
+          history.push('/parentes')
         }}
       >
         cancelar

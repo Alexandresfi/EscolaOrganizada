@@ -43,6 +43,7 @@ export function AddressData({ formik, updatePageProgress }) {
           autoComplete={false}
           fullWidth
           required
+          value={formik.values.zipCode}
           onChange={event => {
             validadeCEP(event)
             formik.setFieldValue('zipCode', event.target.value)

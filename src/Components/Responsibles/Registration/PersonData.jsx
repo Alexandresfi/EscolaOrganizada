@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { TextField } from '@material-ui/core'
@@ -13,41 +13,24 @@ import { Content } from '../../Content'
 
 export function PersonDataParents({ formik, updatePageProgress }) {
   const history = useHistory()
-  const [cellNumber1, setCellNumber1] = useState()
-  const [cellNumber2, setCellNumber2] = useState()
-  const [cpfNumber1, setCpfNumber1] = useState()
-  const [cpfNumber2, setCpfNumber2] = useState()
   const [errorCpf1, setErrorCpf1] = useState(true)
   const [errorCpf2, setErrorCpf2] = useState(true)
 
-  useEffect(() => {
-    formik.values.telephone_1 !== '' &&
-      setCellNumber1(formik.values.telephone_1)
-    formik.values.telephone_2 !== '' &&
-      setCellNumber2(formik.values.telephone_2)
-    formik.values.cpf_1 !== '' && setCpfNumber1(formik.values.cpf_1)
-    formik.values.cpf_2 !== '' && setCpfNumber2(formik.values.cpf_2)
-  }, [])
-
   function handleChance1(value) {
-    setCellNumber1(phoneMask(value))
-    formik.setFieldValue('telephone_1', value)
+    formik.setFieldValue('telephone_1', phoneMask(value))
   }
 
   function handleChance2(value) {
-    setCellNumber2(phoneMask(value))
-    formik.setFieldValue('telephone_2', value)
+    formik.setFieldValue('telephone_2', phoneMask(value))
   }
 
   function handleCpf1(value) {
-    setCpfNumber1(cpfMask(value))
-    formik.setFieldValue('cpf_1', value)
+    formik.setFieldValue('cpf_1', cpfMask(value))
     setErrorCpf1(validate(value))
   }
 
   function handleCpf2(value) {
-    setCpfNumber2(cpfMask(value))
-    formik.setFieldValue('cpf_2', value)
+    formik.setFieldValue('cpf_2', cpfMask(value))
     setErrorCpf2(validate(value))
   }
 
@@ -74,7 +57,7 @@ export function PersonDataParents({ formik, updatePageProgress }) {
           label="CPF do(a) responsável principal:"
           id="cpf_1"
           variant="outlined"
-          value={cpfNumber1}
+          value={formik.values.cpf_1}
           fullWidth
           required
           autoComplete={false}
@@ -131,7 +114,7 @@ export function PersonDataParents({ formik, updatePageProgress }) {
           label="CPF do(a) responsável segundário:"
           id="cpf_2"
           variant="outlined"
-          value={cpfNumber2}
+          value={formik.values.cepf_2}
           fullWidth
           required
           autoComplete={false}
@@ -172,7 +155,7 @@ export function PersonDataParents({ formik, updatePageProgress }) {
           label="Celular responsável principal"
           id="telephone_1"
           variant="outlined"
-          value={cellNumber1}
+          value={formik.values.telephone_1}
           type="text"
           autoComplete={false}
           onChange={e => {
@@ -192,7 +175,7 @@ export function PersonDataParents({ formik, updatePageProgress }) {
           label="Celular de um segundo responsável"
           id="telephone_2"
           variant="outlined"
-          value={cellNumber2}
+          value={formik.values.telephone_2}
           type="text"
           autoComplete={false}
           onChange={e => {
@@ -221,23 +204,6 @@ export function PersonDataParents({ formik, updatePageProgress }) {
 
         {formik.errors.email && formik.touched.email ? (
           <span>{formik.errors.email}</span>
-        ) : null}
-      </Content>
-
-      <Content>
-        <TextField
-          label="E-mail responsável secundário"
-          id="email_2"
-          variant="outlined"
-          type="email"
-          autoComplete={false}
-          fullWidth
-          required
-          {...formik.getFieldProps('email_2')}
-        />
-
-        {formik.errors.email_2 && formik.touched.email_2 ? (
-          <span>{formik.errors.email_2}</span>
         ) : null}
       </Content>
 
