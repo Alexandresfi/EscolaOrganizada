@@ -13,7 +13,9 @@ export const UlHeader = styled.ul`
   align-items: center;
 
   li {
-    margin-right: 4rem;
+    &:not(:last-child) {
+      margin-right: 4rem;
+    }
     list-style: none;
 
     .width-select {
@@ -41,10 +43,8 @@ export const ButtonHearder = styled.button`
   height: 2rem;
   border-radius: 10px;
 
-  a {
-    color: black;
-    font-weight: 500;
-  }
+  font-weight: 600;
+  color: black;
 
   &:hover {
     filter: brightness(0.9);

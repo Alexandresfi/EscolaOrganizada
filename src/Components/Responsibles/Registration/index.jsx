@@ -53,7 +53,6 @@ const initialValues = {
   cpf_2: '',
   zipCod: '',
   street: '',
-  housenumbe: '',
   complement: '',
   city: '',
   district: '',
@@ -85,7 +84,7 @@ const validation = Yup.object().shape({
     .min(8, 'o cep possui oito dígitos, apenas números sem pontos e -')
     .required('Este Campo é obrigatório'),
   street: Yup.string().required('Este Campo é obrigatório'),
-  housenumbe: Yup.number().required('Este Campo é obrigatório'),
+  housenumber: Yup.number().required('Este Campo é obrigatório'),
   complement: Yup.string().required('Este Campo é obrigatório'),
   city: Yup.string().required('Este Campo é obrigatório'),
   district: Yup.string().required('Este Campo é obrigatório'),

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Container = styled.div`
+export const Container = styled.li`
   width: 250px;
   height: 150px;
   border-radius: 10px;
@@ -11,9 +11,12 @@ export const Container = styled.div`
     #d80032 47.64%,
     rgba(104, 35, 56, 0) 98.57%
   );
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+  a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   p {
     text-align: right;
